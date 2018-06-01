@@ -1,4 +1,4 @@
-# tdg-web
+# tdg-reseller-web
 Responsive web for Traveld'Globe.Traveld'globe is a Web application where you can find your right travel destination. It is a platform for backpackers who want to explore things.
 
 ```
