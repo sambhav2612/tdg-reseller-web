@@ -1,0 +1,55 @@
+style(scoped).
+  @import "https://fonts.googleapis.com/css?family=Pontano+Sans"
+
+script(type="text/javascript", src="#{static}/resources/js/TDG.js")
+// cdnjs
+script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.8/jquery.lazy.min.js')
+script(type='text/javascript', src='//cdnjs.cloudflare.com/ajax/libs/jquery.lazy/1.7.8/jquery.lazy.plugins.min.js')
+
+div(id="fb-root")
+script.
+  (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.12';
+  fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+if doAnalytics
+  noscript
+    iframe(src="https://www.googletagmanager.com/ns.html?id=#{result.licensee.gtm_container_id}"
+    height="0" width="0" style="display:none;visibility:hidden")
+  script.
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({
+        'gtm.start': new Date().getTime(), event: 'gtm.js'
+      });
+      var f = d.getElementsByTagName(s)[0],
+              j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src =
+              'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', '#{result.licensee.gtm_container_id}');
+
+script(type='application/ld+json').
+  {
+  "@context" : "http://schema.org",
+  "@type" : "Website",
+  "alternateName" : #{result.licensee.name},
+  "url" : #{result.licensee.domain},
+  "sameAs" : [
+    "https://twitter.com/#{licensee.facebook}",
+    "https://www.facebook.com/#{licensee.facebook}",
+    "https://www.instagram.com/#{licensee.instagram}",
+    ]
+  }
+
+
+
+script.
+  $(function() {
+  $('.lazy').lazy();
+  });

@@ -1,0 +1,173 @@
+extends ../layouts/default
+
+append vars
+  - home = true
+  - seo_title = result.licensee.seo_title
+  - seo_desc = result.licensee.seo_desc
+  - seo_keywords = result.licensee.seo_keywords
+block css
+  style
+    include ../../../public/resources/css/home.css
+block mainContent
+  -licensee = result.licensee
+  - products = result.products
+
+  .row
+    .main-image
+      img.img-lazy(style="width: 100%" data-scroll="100" src="#{licensee.images[0].image_url}"  alt="#{licensee.name}")
+      h1 #{licensee.tagline}
+    .content-wrapper
+      .col-sm-12
+        .home-content
+          div !{result.header}
+        if products.length
+          .row(id="tours")
+            .col-sm-12
+              h2
+                strong Popular Treks and Tours
+              a(href="/plan") View All
+
+            each plan,index in products
+              if index <6
+               .col-sm-4
+                 .tour-tile.card
+                   a(href="/plan/#{plan.slug}" title="Book #{plan.name}")
+                    .img-cont
+                       if plan.image_url
+                         img.img-lazy(data-scroll="100" src="#{plan.image_url}" data-src="#{plan.image_url}" alt="#{plan.name}")
+                       else
+                         img(src="https://graph.facebook.com/#{licensee.facebook}/picture?type=large" alt ="#{licensee.name}")
+                   .content
+                     h3.ellipsis #{plan.name}
+                     .rec_name
+                     | #{plan.duration}
+                     br
+                     | #{plan.location}
+                     .price-tag
+                        .offer From ₹#{plan.offer_price} pp
+                        a.action(href="/plan/#{plan.slug}" title="Book #{plan.name}") View Deal
+
+         else
+           .text-center No Tours Found
+
+        .row
+          .col-sm-12.choose(id="choose")
+            //.card.content
+              h2
+                strong Why Choose Us
+              p We will provide trained Hindi and English speaking guide and proper backup and safety along with great food and camping. Please inquire and fill the form below to book.
+              ul.brick-list
+                li All necessary paper works and permits.
+                li Healthy and Tasty Meals including Breakfast, Lunch and Dinner
+                li Soups and Snacks
+                li Bonfire
+                li Porters and Mules
+                li Travel &  Rescue arrangements
+                li Medical Kits
+                li All government and local taxes if necessary.
+                li World Class Equipment
+                li Best Quality Tents, Sleeping Bags, Camping Equipment, Ropes, Ice Axe (Where required).
+            .col-sm-3.choose-icons
+              .img
+                img(src="#{static}/resources/images/coins.svg" alt="Money Safe Guaranteed")
+              .content
+                h3.head Money Safe Guaranteed
+            .col-sm-3.choose-icons
+              .img
+                img(src="#{static}/resources/images/medal.svg" alt="Rated")
+              .content
+                h3.head Rated 4.9/5
+            .col-sm-3.choose-icons
+              .img
+                img(src="#{static}/resources/images/people.svg" alt="Happy Customers")
+              .content
+                h3.head 1000+ Happy Customers
+            .col-sm-3.choose-icons
+              .img
+                img(src="#{static}/resources/images/money.svg" alt="No Hidden Charges")
+              .content
+                h3.head No Hidden Charges
+        .row.card.content.dark(id="contact")
+            .col-sm-12(id="queryForm")
+              h4 Send your Enquiry for Upcoming trips
+              form.js-validate-form.row.booking-form
+                input(type="hidden" name="slug" value="#{licensee.name + req.originalUrl}" )
+                input(type="hidden" name="travellers" value="1")
+                input(type="hidden" name="licensee" value="#{licensee.id}")
+                .col-sm-6.form-item
+                  label Name
+                    input.form-control(type="text" placeholder="Your name" name="username" data-validate="empty" data-fieldType="name")
+                .col-sm-6.form-item
+                  label Email Id
+                    input.form-control(type="text" placeholder="You email id goes here" name="email" data-validate="email" data-fieldType="email")
+                .col-sm-12.form-item
+                  label Query
+                    textarea.form-control(rows="5" name="comment" placeholder="Please write your query")
+
+                .text-center.form-item
+                  button.btn.btn-secondary.js-getQuote.js-validate-submit Send Enquiry
+
+block js
+  script.
+    (function() {
+      var el = {
+        formBtn: '.js-getQuote',
+        $glider: $(".js-glide")
+      }
+
+      TDG.lazyLoadImages($('.home-content'));
+      el.$glider.glide({
+        type: 'slideshow',
+        autoplay: 2000,
+        hoverpause: false,
+        animationTimingFunc: "ease-out",
+        animationDuration: 1000
+      });
+      var querySubmit = function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        var $btn_ref = $(this), email_ref, user = {};
+
+        el.$form = $btn_ref.parents('form');
+
+        email_ref = $(el.$form.find('[name="email"]'));
+
+        user.slug = $(el.$form.find('[name=slug]')).val();
+        user.name = $(el.$form.find('[name=username]')).val();
+        user.mobile = $(el.$form.find('[name=phone]')).val();
+        user.start_date = $(el.$form.find('[name=start_date]')).val();
+        user.comment = $(el.$form.find('[name=comment]')).val();
+        user.is_booking = false;
+        user.licensee_id= $(el.$form.find('[name=licensee]')).val();
+
+        if (email_ref && email_ref.val()) {
+          user.email = email_ref.val();
+        }
+        if (!$btn_ref.hasClass('disabled')) {
+          $btn_ref.addClass('disabled');
+          $.ajax({
+            url: TDG.urls.PRODUCT_BOOKING,
+            method: 'POST',
+            data: user,
+            success: function (response) {
+              $('<div> We will contact you shortly </div>').insertAfter(el.$form);
+              $btn_ref.removeClass('disabled')
+            },
+            error: function (err) {
+              $('<div> Something is wrong </div>').insertAfter(el.$form);
+              $btn_ref.removeClass('disabled')
+            }
+          });
+        }
+      }; // Query Submit handler ends
+
+      $(el.formBtn).click(querySubmit);
+    })();
+
+
+
+
+
+
+

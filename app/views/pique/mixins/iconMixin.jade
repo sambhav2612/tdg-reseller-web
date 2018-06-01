@@ -1,0 +1,9 @@
+mixin paintIcon(iconCode, options)
+  - icon = req.app.get('svgUtils').getIcon(iconCode, options)
+  svg(viewBox="#{icon.viewBox}", height="#{icon.size.y}", width="#{icon.size.x}")
+    g
+      each path, index in icon.path
+        path(fill-rule="evenodd", clip-rule="evenodd", fill="#{path.fill}", stroke="#{path.stroke}", stroke-width="#{path.strokeWidth}" d="#{path.draw}")
+
+
+

@@ -1,0 +1,67 @@
+-licensee = result.licensee
+- pages = result.pages
+
+.row
+	footer#colophon.site-footer(role='contentinfo', style="background-image: url('https://phoenixexpeditions.files.wordpress.com/2017/07/cropped-img-20170723-wa00061.jpg')")
+		.content-wrapper
+			#tertiary.widget-area.footer-widget-area(role='complementary')
+					.col-sm-4
+						- licensee.address = licensee.address.replace(/\n/g, '<br />' );
+						h3 Meet Us At
+						address !{licensee.address}
+						h3 Email:
+						div
+							a(href="mailto:#{licensee.email}") #{licensee.email}
+						h3 Call Us On
+						div
+							a(href="tel:+91-#{licensee.mobile}") #{licensee.mobile}
+					.col-sm-4
+						#widget-area-3.widget-area(style="overflow:hidden")
+							aside#facebook-likebox-3.widget.widget_facebook_likebox
+								h2.widget-title Did you like us?
+								#fb-root
+								.fb-page(data-href='https://www.facebook.com/#{licensee.facebook}/', data-width='340', data-height='432', data-hide-cover='false', data-show-facepile='true', data-show-posts='false')
+									.fb-xfbml-parse-ignore
+										blockquote(cite='https://www.facebook.com/#{licensee.facebook}/')
+											a(href='https://www.facebook.com/#{licensee.facebook}/') Did you liked us?
+					.col-sm-4
+						#widget-area-4
+							aside#categories-3.widget.widget_categories
+								h2.widget-title Categories
+								ul
+									li.cat-item
+										a(href="/blog" title="Blog") Blog Posts
+									li.cat-item
+										a(href="/pay" title="Easy Online Pay") Easy Online Pay
+									for page in pages
+										li.cat-item
+											a(href="/page/#{page.slug}") #{page.title}
+			// #tertiary
+			.secondary-links
+				.social-links
+					a.social-link.light(href='https://www.facebook.com/#{licensee.facebook}' title="Find travel d'globe on Facebook" target='_blank')
+						mixin paintIcon('facebook',{size:{x:24,y:24}})
+					a.social-link.light(href='https://twitter.com/#{licensee.twitter}' title="Find travel d'globe on Facebook" target='_blank')
+						mixin paintIcon('twitter',{size:{x:24,y:24}})
+					a.social-link.light(href='https://www.instagram.com/#{licensee.instagram}' title="Find travel d'globe on Facebook" target='_blank')
+						mixin paintIcon('instagram',{size:{x:24,y:24}})
+					a.social-link.light(href='https://www.pinterest.com/#{licensee.pinterest}' title="Find travel d'globe on Facebook" target='_blank')
+						mixin paintIcon('pinterest',{size:{x:24,y:24}})
+					a.social-link.light(href='https://www.youtube.com/#{licensee.youtube}' title="Find travel d'globe on Facebook" target='_blank')
+						mixin paintIcon('youtube',{size:{x:24,y:24}})
+
+				div All rights reserved &copy; #{licensee.name}
+			.site-info
+				.col-sm-12.text-center
+					.payment-icons
+					h6.font-weight-fix
+						span.fas.fa-rupee-sign
+						| Payments we process
+					i.fab.fa-cc-visa
+					i.fab.fa-cc-mastercard
+					i.fab.fa-cc-amex
+					i.fab.fa-cc-paypal
+					.caption Powered by traveldglobe.com
+
+
+

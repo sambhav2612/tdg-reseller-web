@@ -1,0 +1,32 @@
+block css
+    style
+       include ../../public/resources/css/datewrapper.css
+
+
+
+.date-wrapper
+    .small Pick your Start Date
+    .clearfix
+       each date in result.dates
+         -start_date = req.app.get('moment')(date.from_date*1000)
+         -dateFormat = start_date.format('MMM, DD')
+            .filter-group(style="padding:3px; float: left")  
+                label.budget-slot(style= "margin-bottom: 7px;") #{dateFormat}
+                    input.js-startDate.radio( type="radio" name="start_date" value="#{start_date.format('DD-MM-YYYY')}")
+           
+block js
+  script.
+    
+    $('input:radio').change(function(){
+         $(".budget-slot").css({
+         background: "white",
+         color: "#8C8C8C"
+         })
+         $(this).parent().css({ 
+          background: "#00BB88",
+          color: "white"
+          })         
+          });
+
+
+

@@ -1,0 +1,154 @@
+extends ../layouts/default
+
+block appendVars
+  - seo_desc = `Have a look at our Popular Treks and Tours | ${result.licensee.name}.`
+  - seo_title = `Book popular tours from | ${result.licensee.name}.`
+block css
+  style
+      include ../../../public/resources/css/home.css
+  style.
+     .traveltour-page-title-wrap{ background-image: url('https://images.pexels.com/photos/207896/pexels-photo-207896.jpeg?auto=compress&cs=tinysrgb&h=650&w=940');
+     background-position: center;
+     background-size: cover;
+     position: relative; 
+     }
+
+     .traveltour-page-title-wrap .traveltour-page-title-overlay{ position: absolute; top: 0px; right: 0px; bottom: 0px; left: 0px; }
+     .traveltour-page-title-wrap .traveltour-page-title-container{ position: relative; }
+     .traveltour-page-title-wrap .traveltour-page-title{ text-transform: uppercase; letter-spacing: 2px; }
+     .traveltour-page-title-wrap .traveltour-style-custom .traveltour-page-title{ font-size: 37px; margin-bottom: 0px; }
+
+     
+
+block mainContent
+  -licensee = result.licensee
+  -products = result.products
+  -blogs = result.blogs
+
+  .site-content
+          .traveltour-page-title-wrap.traveltour-style-large.traveltour-center-align.row
+            .traveltour-header-transparent-substitute(style='height: 147px;')
+            .traveltour-page-title-overlay
+            .traveltour-page-title-container.traveltour-container
+              .traveltour-page-title-content.traveltour-item-pdlr
+                h1.traveltour-page-title#tour-page-title-mbl Destinations
+                .traveltour-page-caption
+                     | Explore Tours By Destinations
+         
+          header.entry-header
+            br
+            h3.entry-title Popular Treks and Tours
+            // .entry-header
+            footer.entry-footer
+            // .entry-footer
+            .gdlr-core-pbf-element
+                  .row(id="tours")
+                    each plan,index in products
+                      .col-sm-4
+                          .gdlr-core-item-mglr
+                            .tourmaster-tour-grid.tourmaster-tour-frame.tourmaster-price-right-title
+                              .tourmaster-tour-thumbnail.tourmaster-media-image
+                                a(href='/plan/#{plan.slug}')
+                                  .img-cont
+                                    img(src='#{plan.thumb_url}', alt='')
+                                .tourmaster-thumbnail-ribbon.gdlr-core-outer-frame-element(style='color: #ffffff;background-color: #4692e7;')
+                                  if plan.base_price - plan.offer_price > 0
+                                    .tourmaster-thumbnail-ribbon-cornor(style='border-right-color: rgba(70, 146, 231, 0.5);')
+                                  |  #{Math.ceil((plan.base_price-plan.offer_price)*100/plan.base_price)} %
+                              .tourmaster-tour-content-wrap.gdlr-core-skin-e-background
+                                h3.tourmaster-tour-title.gdlr-core-skin-title
+                                  a(href='/plan/#{plan.slug}') #{plan.name}
+                                .tourmaster-tour-price-wrap.tourmaster-discount
+                                  span.tourmaster-tour-price
+                                    span.tourmaster-head From
+                                    span.tourmaster-tail ₹#{plan.base_price}
+                                  span.tourmaster-tour-discount-price ₹#{plan.offer_price}
+                                .tourmaster-tour-info-wrap.clearfix
+                                  .tourmaster-tour-info.tourmaster-tour-info-duration-text
+                                    i.material-icons timer
+                                    | #{plan.duration}
+        .row.content.dark(id="contact")
+          .content-wrapper
+            .col-sm-6.col-sm-offset-3(id="queryForm")
+              h4 Subscribe for Upcoming trips
+              form.js-validate-form.row.booking-form
+                input(type="hidden" name="slug" value="#{licensee.name + req.originalUrl}" )
+                input(type="hidden" name="travellers" value="1")
+                input(type="hidden" name="licensee" value="#{licensee.id}")
+                input(type="hidden"  name="phone")
+                .col-sm-6.form-item
+                  label Name
+                    input.form-control(type="text" placeholder="Your name" name="username" data-validate="empty" data-fieldType="name")
+                .col-sm-6.form-item
+                  label Email Id
+                    input.form-control(type="text" placeholder="You email id goes here" name="email" data-validate="email" data-fieldType="email")
+
+                .text-center.form-item
+                  button.btn.btn-secondary.js-getQuote.js-validate-submit Subscribe
+
+
+block js
+  script.
+    (function() {
+      var el = {
+        formBtn: '.js-getQuote',
+        $glider: $(".js-glide")
+      }
+
+      TDG.lazyLoadImages($('.home-content'));
+      el.$glider.glide({
+        type: 'slideshow',
+        autoplay: 2000,
+        hoverpause: false,
+        animationTimingFunc: "ease-out",
+        animationDuration: 1000
+      });
+      var querySubmit = function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        var $btn_ref = $(this), email_ref, user = {};
+
+        el.$form = $btn_ref.parents('form');
+
+        email_ref = $(el.$form.find('[name="email"]'));
+
+        user.slug = $(el.$form.find('[name=slug]')).val();
+        user.name = $(el.$form.find('[name=username]')).val();
+        user.mobile = $(el.$form.find('[name=phone]')).val();
+        user.start_date = $(el.$form.find('[name=start_date]')).val();
+        user.comment = $(el.$form.find('[name=comment]')).val();
+        user.is_booking = false;
+        user.licensee = $(el.$form.find('[name=licensee]')).val();
+
+        if (email_ref && email_ref.val()) {
+          user.email = email_ref.val();
+        }
+        if (!$btn_ref.hasClass('disabled')) {
+          $btn_ref.addClass('disabled');
+
+          $.ajax({
+            url: TDG.urls.PRODUCT_BOOKING,
+            method: 'POST',
+            data: user,
+            success: function (response) {
+              $('<div> Thank You showing Interest </div>').insertAfter(el.$form);
+              $btn_ref.removeClass('disabled')
+            },
+            error: function (err) {
+              $('<div> Something is wrong </div>').insertAfter(el.$form);
+              $btn_ref.removeClass('disabled')
+            }
+          });
+        }
+      }; // Query Submit handler ends
+
+      $(el.formBtn).click(querySubmit);
+    })();
+
+
+
+
+
+
+

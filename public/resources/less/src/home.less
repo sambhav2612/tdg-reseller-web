@@ -1,0 +1,125 @@
+@import url('../variables');
+@import '../mixins/allMixin';
+
+
+.static-header {
+  position: relative;
+  height: 40vh;
+  background: @pallet-background-footer;
+  margin-bottom: @margin-large;
+
+  .img img {
+    width: 100%;
+    position: relative;
+  }
+  .caption {
+    bottom: 0;
+    left:0;
+    right:0;
+    text-align: center;
+    z-index: @index-floor;
+    color:@pallet-color-light;
+    position: absolute;
+  }
+
+  .static-title {
+    position: absolute;
+    z-index: @index-floor;
+    left: 50%;
+    top: 50%;
+    text-shadow: 1px 1px 1px #232121;
+    transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    text-align: center;
+    color: @pallet-color-light;
+    font-size: 24px;
+    font-weight: 900;
+    line-height: 1.2;
+
+    .desc {
+      font-size: @font-base;
+      font-weight: 400;
+    }
+
+  }
+  &:after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: fade(@pallet-background-footer, 30%);
+    width: 100%;
+    display: inline-block;
+    content: '';
+    z-index: @index-ground;
+  }
+
+}
+
+.img-cont {
+  display: block;
+}
+
+.brick {
+  padding: @padding-base @padding-medium;
+  margin: @margin-base @margin-medium;
+  border: 2px solid @pallet-border-primary;
+  background: lighten(@pallet-background-secondary,1%);
+  display: inline-block;
+  min-width: 80px;
+}
+
+.inclusions {
+  .brick {
+    text-align: center;
+    font-size: @font-small;
+    border: 2px solid @pallet-border-success;
+    border-radius: 10px;
+  }
+}
+
+.choose {
+  margin-bottom: @multiplier-medium*@margin-large;
+}
+
+
+.choose-icons {
+  text-align: center;
+  img {
+    max-width: 150px;
+  }
+}
+.booking-form {
+  .form-item {
+    margin-bottom: @margin-large;
+    label {
+      display: block;
+    }
+  }
+}
+
+.pique {
+  .card {
+    background: @pallet-background-footer;
+  }
+
+  .product-tile {
+    .trip-tags {
+      .tag {
+        color: @pallet-color-light;
+      }
+    }
+  }
+}
+@media (max-width: @screen-mobile) {
+  .static-header {
+    background-position: 0;
+    height: 60vh;
+    .static-title {
+      top: 8%;
+      transform: translateX(0) translateY(0);
+      -webkit-transform: translateX(0) translateY(0);
+      text-align: justify;
+      font-size: 18px;
+    }
+  }
+}

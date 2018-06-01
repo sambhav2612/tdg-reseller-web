@@ -1,0 +1,140 @@
+extends ../layouts/default
+
+append appendVars
+   - seo_desc = result.event.seo_desc 
+   - thumb_url = result.event.thumb_url
+   - seo_title = result.event.seo_title || result.event.name
+block css
+  style
+    include ../../../public/resources/css/product.css
+    include ../../../public/resources/css/shareIcons.css
+block mainContent
+  - event = result.event
+  - start_date = req.app.get('moment')(event.start_date*1000)
+  - end_date = req.app.get('moment')(event.end_date*1000)
+      .content-wrapper(style="margin-top: 140px;")
+        .col-sm-12
+          .trip-head.clearfix
+            .col-sm-1.hidden-xs
+              .img-thumb
+                img.js-thumb.hand(src="#{event.thumb_url}" data-img="#{event.thumb_url}" alt="#{event.name}")
+            .col-sm-7
+              .title-img
+                .img-cont
+                  img.js-image(src="#{event.image_url}" alt="#{event.name}")
+            .col-sm-4
+              h3 #{event.name}
+              .row
+                .col-sm-12(style="padding:5px 15px; 15px;")
+                  .trip-tags
+                    .tag
+                      .bulb
+                        mixin paintIcon('duration', {size: {x:15,y:15}, fill:'#fff'})
+                      .name
+                        strong Event Duration: #{end_date.diff(start_date, 'days')+1} Days
+                    .tag
+                      .bulb
+                        mixin paintIcon('car', {size: {x:15,y:15}, fill:'#fff'})
+                      .name
+                        strong Pick up - #{event.pickup || 'NA'}
+                    .tag
+                      .bulb
+                        mixin paintIcon('group', {size: {x:15,y:15},fill:'#fff'})
+                      .name
+                        strong Total Seats for the event: #{event.capacity}
+                    if event.location
+                      .tag
+                        .bulb
+                          mixin paintIcon('map_marker', {size: {x:15,y:15},fill:'#fff'})
+                        .name
+                          strong Location: #{event.location}
+                    
+        
+        .col-sm-8.left-section
+            section(id="itinerary")
+            .card.content
+              h4 Itinerary of the Package
+              .itinerary-content.js-content
+                .content !{event.desc}
+                .show-more.js-showMore Show More
+          .col-sm-4.vertical-up
+            .booking-card.card
+              .design-price
+                .js-priceMenu
+                  .price.dropmenu
+                    .offer.js-offer ₹#{parseInt(event.offer_price)}
+                      if event.base_price && (event.offer_price != event.base_price)
+                        .base-price.js-base ₹#{parseInt(event.base_price)}
+                    .js-priceOptions
+                  .small
+                    if event.base_price && (event.offer_price != event.base_price)
+                        span Discount&nbsp;
+                        span.js-discount ₹#{event.base_price - event.offer_price}&nbsp;
+                    span per person
+              .content
+                section
+                  div Event Starting Date: #{start_date.format('DD.MMM.YYYY')}
+                  div Event Ending Date: #{end_date.format('DD.MMM.YYYY')}
+                section
+                  .small Package Cost Calculator
+                  .row.text-center
+                    .col-xs-3
+                      div
+                        small Price
+                      .js-offer ₹#{parseInt(event.offer_price)}
+                    .col-xs-5
+                      div
+                        small Travellers
+                      div
+                        input.js-priceFactor.js-count(type="hidden" name="travellers" placeholder="Your Group size" value="1")
+                        .qty-icon.js-qIcon(data-type="minus") -
+                        .qty.js-quantity 1
+                        .qty-icon.js-qIcon(data-type="plus") +
+                    .col-xs-4
+                      div
+                        small Total
+                      div ₹
+                        span.js-total #{1 * parseInt(event.offer_price)}
+                .booking-btn
+                  .err-txt.js-bookStatus
+                  .btn.btn-primary.lg.js-book.tr-bookNow(data-slug="#{event.slug}") Book Now
+
+          .blank.hidden-xs(style="position: fixed") 
+            .share
+              a.fb(href="https://www.facebook.com/share.php?u=https://#{licensee.domain+'/plan/'+ event.slug}" target="_blank")
+                i.fa.fa-facebook
+              //a.vk(href='https://www.facebook.com')
+                i.fa.fa-vk
+              a.tt(href= "http://twitter.com/share?text=#{event.name}&url=https://#{licensee.domain+'/plan/'+ event.slug}" target="_blank")
+                i.fa.fa-twitter
+              a.gp(href= "https://plus.google.com/share?url=https://#{licensee.domain+'/plan/'+ event.slug}" title="Share on Google+" channel="google" element="Widget" class="tr-share social-connect-link google js-social-refer" target="_blank")
+                i.fa.fa-google-plus
+              |share
+block js
+  script.
+    TDG.productPrice = parseInt("#{event.offer_price}");
+  script
+    include ../../../public/resources/js/fragments/event.js
+
+  
+script(type='application/ld+json').
+  {
+  "@type": "Event",
+  "name": #{event.name},
+  "startTime": #{event.start_date},
+  "endTime": #{event.end_date},
+  "url": "http://#{licensee.domain}/event/#{event.slug}",
+  "location": {
+  "@type": "Place",
+  "address": #{event.location}
+  },
+  
+  "organizer": {
+  "@type": #{event.name},
+  "organizer": #{event.name}
+  },
+  "description": "Overview",
+  "price": {
+  "@type": #{event.type},
+  "price": #{event.offer_price},
+  }

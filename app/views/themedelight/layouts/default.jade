@@ -1,0 +1,31 @@
+doctype html
+
+include ../../metaMixin
+include ../mixins/iconMixin
+include ../mixins/paginationMixin
+include ../mixins/productMixin
+
+
+html(lang="en")
+  block appendVars
+  include ../../head
+
+  body
+
+    #content-container.container-fluid
+      #page.hfeed.site
+        - if (!hideHeader){
+          include ../includes/header
+        -}
+
+        .row.main-content
+          .col-xs-12
+            block mainContent
+
+        - if (!hideFooter){
+          include ../includes/footer
+        -}
+      .fixed-overlay.hide.hidden-xs
+
+  include ../../foot
+  block js

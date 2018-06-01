@@ -1,0 +1,33 @@
+head(itemscope itemtype="http://schema.org/WebSite")
+
+  mixin metaTitle(seo_title)
+  meta(name="google-site-verification" content="#{result.licensee.google_site_verification}")
+
+  - if(noIndex)
+    meta(name="robots", content="noindex, nofollow, noarchive")
+  - else
+    meta(name="robots", content="index, follow, noarchive")
+  meta(http-equiv="Content-Type", content="text/html; charset=UTF-8")
+  meta(charset="UTF-8")
+  meta(name="viewport" content="width=device-width")
+  mixin metaDescription(seo_desc)
+  mixin metaKeywords(seo_keywords)
+  //link(rel="canonical" href="#{cannonical}" itemprop="url")
+  //meta(itemprop="url" content="#{cannonical}")
+
+  meta(http-equiv="x-dns-prefetch-control" content="on")
+  link(rel="dns-prefetch" href="http://www.res.cloudinary.com")
+  link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+  link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.0.8/css/all.css', integrity='sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S', crossorigin='anonymous')
+  link(rel="dns-prefetch" href="#{static}")
+  if result.licensee
+    link(rel="shortcut icon"  href="https://graph.facebook.com/#{result.licensee.facebook}/picture?width=80&height=80")
+
+  //mixin metaOG(seo_data, cannonical, author)
+  mixin metaOG(seo_title,seo_desc,seo_keywords,result.licensee, cannonical, author, thumb_url)
+  link( href='#{static}/resources/css/TDG.css' rel="stylesheet" type="text/css")
+  link( href='#{static}/resources/themes/#{result.licensee.theme}/style.css?v=1.1.7' rel="stylesheet" type="text/css")
+  link( href="https://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet")
+  meta(name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
+  if ENV == 'prod'
+  block css

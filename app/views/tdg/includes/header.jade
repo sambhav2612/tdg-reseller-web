@@ -1,0 +1,36 @@
+-licensee = result.licensee
+
+header.header.row
+  .content-wrapper
+    .col-sm-2.col-xs-3
+      a(href="/"  title="Home")
+        img(style="width:100%;max-width:100px;border-radius:100%" src="https://graph.facebook.com/#{licensee.facebook}/picture?type=large")
+
+    if home
+      .col-sm-7.col-sm-offset-3.text-right.hidden-xs
+        div
+          a.btn.btn-ghost.dark(style="margin:10px;" href="#tours" title="Best tour deals") Tours
+          a.btn.btn-ghost.dark(style="margin:10px;" href="#contact" title="Contact") Contact
+          a.btn.btn-ghost.dark(style="margin:10px;" href="/blog" title="Blog") Blog
+          a.btn.btn-ghost.dark(style="margin:10px;" href="#reviews" title="Testimonial") Testimonial
+          a.btn.btn-ghost.dark(style="margin:10px;" href="#choose" title="Why choose us") Why Choose Us
+          a.btn.btn-ghost.dark(style="margin:10px;" href="#contact" title="Enquire") Enquire
+
+        div Contact Us at&nbsp;
+          a(href="tel:+91#{licensee.mobile}") +91-#{licensee.mobile}
+      .col-xs-9.text-right.visible-xs
+        div
+          a.btn.btn-ghost.dark(href="#contact" title="Contact") Contact
+          a.btn.btn-ghost.dark(href="/blog" title="Blog") Blog
+        div Contact Us at&nbsp;
+          a(href="tel:+91#{licensee.mobile}") +91-#{licensee.mobile}
+    else
+      .col-sm-6.col-sm-offset-3.text-right.hidden-xs
+        div
+          a.btn.btn-ghost.dark(style="margin:10px;" href="/#tours" title="Best tour deals") Tours
+          a.btn.btn-ghost.dark(style="margin:10px;" href="/#contact" title="Contact") Contact
+          a.btn.btn-ghost.dark(style="margin:10px;" href="/#reviews" title="Testimonial") Testimonial
+
+        div Contact Us at&nbsp;
+          a(href="tel:+91#{licensee.mobile}") +91-#{licensee.mobile}
+

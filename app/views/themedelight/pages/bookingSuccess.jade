@@ -1,0 +1,59 @@
+extends ../layouts/default
+
+block mainContent
+
+   .row
+      .content-wrapper.sm
+         .col-sm-8.col-sm-offset-2
+            .card.text-center.content
+               mixin paintIcon('circleTick')
+               h1 Great!
+               h1 Your booking has been successfully placed.
+            if pageObject
+               .card.text-center.content
+                  h3(style="margin:40px 0; padding-bottom:10px;border-bottom:1px solid #eee;") Your booking id is&nbsp;
+                     strong #{pageObject.txnid}.
+                     .inline-block We have received the advance of ₹&nbsp;#{pageObject.amount} for your booking for #{pageObject.travellers} traveller(s), please relax our team will reach you for confirmation in few minutes
+                  .row
+                     .col-sm-6.text-left
+                        h4 Traveller Details
+                        div(style="margin-bottom:15px;")
+                           div #{pageObject.firstname}
+                           div #{pageObject.email}
+                           div #{pageObject.phone}
+                        if pageObject.travellers
+                           div No. of Travellers: #{pageObject.travellers}
+                     .col-sm-6.text-left
+                        div(style="margin-bottom:15px;font-size:16px")
+                           div(style="padding:5px 0;") Advance Paid: ₹&nbsp;#{pageObject.amount}
+                           if pageObject.travellers
+                              div(style="padding:5px 0;") Balance to pay: ₹&nbsp;#{(pageObject.travellers* pageObject.price) -pageObject.amount}
+            else
+               .card.text-center.content
+                  h3(style="margin:40px 0; padding-bottom:10px;border-bottom:1px solid #eee;") Your booking id is&nbsp;
+                     strong #{result.booking.booking_id}.
+                     .inline-block We have received the advance of ₹&nbsp;#{result.booking.paid} for your booking for #{result.booking.travellers} traveller(s), please relax our team will reach you for confirmation in few minutes
+                  .row
+                     .col-sm-6.text-left
+                        h4 Traveller Details
+                        div(style="margin-bottom:15px;")
+                           div #{result.booking.name}
+                           div #{result.booking.email}
+                           div #{result.booking.phone}
+                        if result.booking.travellers
+                           div No. of Travellers: #{result.booking.travellers}
+                     .col-sm-6.text-left
+                        div(style="margin-bottom:15px;font-size:16px")
+                           div(style="padding:5px 0;") Amount Paid: ₹&nbsp;#{result.booking.paid}
+                           //div(style="padding:5px 0;") Balance to pay: ₹&nbsp;#{result.booking.total_price + result.booking.tax- result.booking.paid}
+
+
+         .col-sm-8.col-sm-offset-2
+
+            div(style="margin-bottom:15px;")
+         .col-sm-8.col-sm-offset-2.text-center
+            p Incase you have any questions or concerns please reach out to us&nbsp;
+               br
+               a(href="mailto:hello@traveldglobe.com") hello@traveldglobe.com
+            div Thank you for sharing the love for travel.
+            h5 Team TDG

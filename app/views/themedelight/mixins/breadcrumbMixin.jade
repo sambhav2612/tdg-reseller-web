@@ -1,0 +1,221 @@
+mixin locationBreadCrumb(location)
+   - counter = 1
+   ul.breadcrumb(itemscope itemtype="http://schema.org/BreadcrumbList")
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a.link(itemprop="item" href="#{host}/countries" title="Where to go")
+            span(itemprop="name") All locations
+         meta(itemprop="position" content="#{counter}")
+      - counter += 1
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a.link(itemprop="item" href="#{host}/country/#{location.country.slug}" title="Locations in #{location.country.name}")
+            span(itemprop="name") #{location.country.name}
+         meta(itemprop="position" content="#{counter}")
+      - counter += 1
+      if location.state.slug
+         li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+            a.link(itemprop="item" href="#{host}/country/#{location.country.slug}/#{location.state.slug}" title="Locations in #{location.state.name}")
+               span(itemprop="name") #{location.state.name}
+            meta(itemprop="position" content="#{counter}")
+         - counter += 1
+   span #{location.name}
+
+mixin placesBreadCrumb(location)
+   - counter = 1
+   ul.breadcrumb(itemscope itemtype="http://schema.org/BreadcrumbList")
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a.link(itemprop="item" href="#{host}/countries" title="Where to go")
+            span(itemprop="name") All locations
+         meta(itemprop="position" content="#{counter}")
+      - counter += 1
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a.link(itemprop="item" href="#{host}/places" title="Unxeplored Places")
+            span(itemprop="name") Unxeplored Places
+         meta(itemprop="position" content="#{counter}")
+      - counter += 1
+   span #{location.name}
+
+mixin activityBreadCrumb(location, activity)
+   - counter = 1
+   ul.breadcrumb(itemscope itemtype="http://schema.org/BreadcrumbList")
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a.link(itemprop="item" href="#{host}/country/#{location.country.slug}" title="Locations in #{location.country.name}")
+            span(itemprop="name") #{location.country.name}
+         meta(itemprop="position" content="#{counter}")
+      - counter += 1
+      if location.state.slug
+         li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+            a.link(itemprop="item" href="#{host}/country/#{location.country.slug}/#{location.state.slug}" title="Locations in #{location.state.name}")
+               span(itemprop="name") #{location.state.name}
+            meta(itemprop="position" content="#{counter}")
+         - counter += 1
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a.link(itemprop="item" href="#{host}/destination/#{location.slug}" title="#{location.name} travel guide")
+            span(itemprop="name") #{location.name} travel guide
+         meta(itemprop="position" content="#{counter}")
+   span #{activity}
+
+mixin activityListBreadCrumb(location)
+   - counter = 1
+   ul.breadcrumb(itemscope itemtype="http://schema.org/BreadcrumbList")
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a(itemprop="item" href="#{host}/country/#{location.country.slug}" title="Locations in #{location.country.name}")
+            span(itemprop="name") #{location.country.name}
+         meta(itemprop="position" content="#{counter}")
+      - counter += 1
+      if location.state.slug
+         li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+            a(itemprop="item" href="#{host}/country/#{location.country.slug}/#{location.state.slug}" title="Locations in #{location.state.name}")
+               span(itemprop="name") #{location.state.name}
+            meta(itemprop="position" content="#{counter}")
+         - counter += 1
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a(itemprop="item" href="#{host}/destination/#{location.slug}" title="#{location.name} travel guide")
+            span(itemprop="name") #{location.name} travel guide
+         meta(itemprop="position" content="#{counter}")
+   span All places to visit and things to do
+
+mixin foodListBreadCrumb(location)
+   - counter = 1
+   ul.breadcrumb(itemscope itemtype="http://schema.org/BreadcrumbList")
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a(itemprop="item" href="#{host}/country/#{location.country.slug}" title="Locations in #{location.country.name}")
+            span(itemprop="name") #{location.country.name}
+         meta(itemprop="position" content="#{counter}")
+      - counter += 1
+      if location.state.slug
+         li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+            a(itemprop="item" href="#{host}/country/#{location.country.slug}/#{location.state.slug}" title="Locations in #{location.state.name}")
+               span(itemprop="name") #{location.state.name}
+            meta(itemprop="position" content="#{counter}")
+         - counter += 1
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a(itemprop="item" href="#{host}/destination/#{location.slug}" title="#{location.name} travel guide")
+            span(itemprop="name") #{location.name} travel guide
+         meta(itemprop="position" content="#{counter}")
+   span All food stuffs and things to eat
+
+mixin souvenirListBreadCrumb(location)
+   - counter = 1
+   ul.breadcrumb(itemscope itemtype="http://schema.org/BreadcrumbList")
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a(itemprop="item" href="#{host}/country/#{location.country.slug}" title="Locations in #{location.country.name}")
+            span(itemprop="name") #{location.country.name}
+         meta(itemprop="position" content="#{counter}")
+      - counter += 1
+      if location.state.slug
+         li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+            a(itemprop="item" href="#{host}/country/#{location.country.slug}/#{location.state.slug}" title="Locations in #{location.state.name}")
+               span(itemprop="name") #{location.state.name}
+            meta(itemprop="position" content="#{counter}")
+         - counter += 1
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a(itemprop="item" href="#{host}/destination/#{location.slug}" title="#{location.name} travel guide")
+            span(itemprop="name") #{location.name} travel guide
+         meta(itemprop="position" content="#{counter}")
+   span All souvenirs and things you can buy
+mixin galleryBreadCrumb(location)
+   - counter = 1
+   ul.breadcrumb(itemscope itemtype="http://schema.org/BreadcrumbList")
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a(itemprop="item" href="#{host}/country/#{location.country.slug}" title="Locations in #{location.country.name}")
+            span(itemprop="name") #{location.country.name}
+         meta(itemprop="position" content="#{counter}")
+      - counter += 1
+      if location.state.slug
+         li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+            a(itemprop="item" href="#{host}/country/#{location.country.slug}/#{location.state.slug}" title="Locations in #{location.state.name}")
+               span(itemprop="name") #{location.state.name}
+            meta(itemprop="position" content="#{counter}")
+         - counter += 1
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a(itemprop="item" href="#{host}/destination/#{location.slug}" title="#{location.name travel guide")
+            span(itemprop="name") #{location.name} travel guide
+         meta(itemprop="position" content="#{counter}")
+   span Photos of #{location.name}
+
+mixin stayBreadCrumb(location)
+   - counter = 1
+   ul.breadcrumb(itemscope itemtype="http://schema.org/BreadcrumbList")
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a(itemprop="item" href="#{host}/country/#{location.country.slug}" title="Locations in #{location.country.name}")
+            span(itemprop="name") #{location.country.name}
+         meta(itemprop="position" content="#{counter}")
+      - counter += 1
+      if location.state.slug
+         li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+            a(itemprop="item" href="#{host}/country/#{location.country.slug}/#{location.state.slug}" title="Locations in #{location.state.name}")
+               span(itemprop="name") #{location.state.name}
+            meta(itemprop="position" content="#{counter}")
+         - counter += 1
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a(itemprop="item" href="#{host}/destination/#{location.slug}" title="#{location.name travel guide")
+            span(itemprop="name") #{location.name} travel guide
+         meta(itemprop="position" content="#{counter}")
+   span Top Places to stay and Hotels in #{location.name}
+
+mixin stateBreadCrumb(country, state)
+   ul.breadcrumb(itemscope itemtype="http://schema.org/BreadcrumbList")
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a.link(itemprop="item" href="#{host}/countries" title="Where to go")
+            span(itemprop="name") All locations
+         meta(itemprop="position" content="1")
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a.link(itemprop="item" href="#{host}/country/#{country.slug}" title="Locations in #{country.name}")
+            span(itemprop="name") #{country.name}
+         meta(itemprop="position" content="2")
+   span #{state.name}
+
+mixin stateTopBreadCrumb(country, state)
+   ul.breadcrumb(itemscope itemtype="http://schema.org/BreadcrumbList")
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a.link(itemprop="item" href="#{host}/countries" title="Where to go")
+            span(itemprop="name") All locations
+         meta(itemprop="position" content="1")
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a.link(itemprop="item" href="#{host}/country/#{country.slug}" title="Locations in #{country.name}")
+            span(itemprop="name") #{country.name}
+         meta(itemprop="position" content="2")
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a.link(itemprop="item" href="#{host}/country/#{country.slug}/#{state.slug}" title="Places to visit in #{state.name}")
+            span(itemprop="name") Places to visit in #{state.name}
+         meta(itemprop="position" content="3")
+   span Top destinations in #{state.name}
+
+mixin stateMapBreadCrumb(country, state)
+   ul.breadcrumb(itemscope itemtype="http://schema.org/BreadcrumbList")
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a.link(itemprop="item" href="#{host}/countries" title="Where to go")
+            span(itemprop="name") All locations
+         meta(itemprop="position" content="1")
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a.link(itemprop="item" href="#{host}/country/#{country.slug}" title="Locations in #{country.name}")
+            span(itemprop="name") #{country.name}
+         meta(itemprop="position" content="2")
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a.link(itemprop="item" href="#{host}/country/#{country.slug}/#{state.slug}" title="Places to visit in #{state.name}")
+            span(itemprop="name") Places to visit in #{state.name}
+         meta(itemprop="position" content="3")
+   span Map view of #{state.name}
+mixin stateGalleryBreadCrumb(country, state)
+   ul.breadcrumb(itemscope itemtype="http://schema.org/BreadcrumbList")
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a.link(itemprop="item" href="#{host}/countries" title="Where to go")
+            span(itemprop="name") All locations
+         meta(itemprop="position" content="1")
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a.link(itemprop="item" href="#{host}/country/#{country.slug}" title="Locations in #{country.name}")
+            span(itemprop="name") #{country.name}
+         meta(itemprop="position" content="2")
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a.link(itemprop="item" href="#{host}/country/#{country.slug}/#{state.slug}" title="Places to visit in #{state.name}")
+            span(itemprop="name") Places to visit in #{state.name}
+         meta(itemprop="position" content="3")
+   span Photos of #{state.name}
+
+mixin countryBreadCrumb(country)
+   ul.breadcrumb(itemscope itemtype="http://schema.org/BreadcrumbList")
+      li(itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem")
+         a.link(itemprop="item" href="#{host}/countries" title="Where to go")
+            span(itemprop="name") All locations
+         meta(itemprop="position" content="1")
+   span #{country.name}

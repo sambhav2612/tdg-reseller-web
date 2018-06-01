@@ -1,0 +1,215 @@
+extends ../layouts/default
+
+block css
+  style
+    include ../../../public/resources/css/product.css
+block mainContent
+  -url = host + req.originalUrl
+  - product = result.product
+  - today = new Date(req.app.get('moment')().zone(330))
+  - today.setDate(today.getDate() + 2);
+  if !checkin
+    -checkin = ("0" + today.getDate()).slice(-2);
+    -checkin += '-';
+    -checkin += ("0" + (today.getMonth() + 1)).slice(-2);
+    -checkin += '-';
+    -checkin += today.getFullYear();
+  .row
+    .content-wrapper
+      .col-sm-12
+        ul.list.nav.js-action(style="margin-bottom:10px;")
+          li
+            a(href="#package")
+              .inline-block(style="vertical-align: text-top;margin-right:5px;")
+                mixin paintIcon('information', {size: {x:18,y:18},fill:'#333'})
+              .inline-block Package Details
+          li
+            a(href="#itinerary")
+              .inline-block(style="vertical-align: text-top;margin-right:5px;")
+                mixin paintIcon('placeToVisit', {size: {x:18,y:18},fill:'#333'})
+              .inline-block Itinerary
+          li
+            a(href="#reviews")
+              .inline-block(style="vertical-align: text-top;margin-right:5px;")
+                mixin paintIcon('reviews', {size: {x:18,y:18},fill:'#333'})
+              .inline-block Reviews
+          li
+            a(href="#gallery")
+              .inline-block(style="vertical-align: text-top;margin-right:5px;")
+                mixin paintIcon('gallery', {size: {x:18,y:18},fill:'#333'})
+              .inline-block Gallery
+          li
+            a(href="#bookForm") Book Now
+      .col-sm-12
+        .trip-head.clearfix
+          .col-sm-1
+            .img-thumb
+              img.js-thumb.hand(src="#{product.image_url}" data-img="#{product.image_url}" alt="#{product.name}")
+            if product.images && product.images.length
+              -each photo, index in product.images
+                if index < 5
+                  .img-thumb
+                    img.js-thumb.hand(src="#{photo.thumb_url}"  data-img="#{photo.image_url}" alt="#{photo.caption}")
+          .col-sm-7
+            .title-img
+              .img-cont
+                img.js-image(src="#{product.image_url}" alt="#{product.name}")
+          .col-sm-4
+            h1 #{product.name}
+            .row
+              .col-sm-12(style="padding:5px 15px; 15px;")
+                .trip-tags
+                  .tag
+                    .bulb
+                      mixin paintIcon('duration', {size: {x:15,y:15}, fill:'#fff'})
+                    .name
+                      strong Trip Duration: #{product.duration}
+                  .tag
+                    .bulb
+                      mixin paintIcon('car', {size: {x:15,y:15}, fill:'#fff'})
+                    .name
+                      strong Pick up - #{product.pickup || 'NA'}
+                  .tag
+                    .bulb
+                      mixin paintIcon('group', {size: {x:15,y:15},fill:'#fff'})
+                    .name
+                      strong Group size of #{product.travellers} for confirm booking
+                  if product.location
+                    .tag
+                      .bulb
+                        mixin paintIcon('map_marker', {size: {x:15,y:15},fill:'#fff'})
+                      .name
+                        strong Location: #{product.location}
+                  
+      
+      .col-sm-8(style="padding-right:35px;")
+        if product.inclusions && product.inclusions.length
+          section
+            .card.content
+              h2 Package Inclusion
+              div.inclusions
+                -each inclusion in product.inclusions
+                  .brick
+                    div
+                      mixin paintIcon(inclusion.icon, {size: {x:30,y:30}})
+                    div #{inclusion.name}
+        
+        section
+          .card.content(id="package")
+            h2 Package Details
+            div (#{product.name})
+            if product.desc
+              - desc = product.desc.replace(/\n/g, '<br />' );
+              p(itemprop="description") !{desc}
+              if product.details
+                div !{product.details}
+        section(id="itinerary")
+          .card.content
+            h2 Itinerary of the Package
+            .itinerary-content.js-content
+              .content !{product.itinerary}
+              .show-more.js-showMore Show More
+        section
+          if product.packs
+            .card.content
+              h2 Things to carry with you
+              div !{product.packs}
+        if product.exclusions && product.exclusions.length
+          section
+              h2 Exclusions
+              div.exclusions
+                -each exclusion in product.exclusions
+                  .brick #{exclusion.name}
+
+      .col-sm-4.vertical-up(style="padding-right:60px;")
+          .booking-card.card
+            .design-price
+              .js-priceMenu
+                .price.dropmenu
+                  .offer.js-offer ₹#{parseInt(product.offer_price)}
+                  if product.offer_price != product.base_price
+                    .base-price.js-base ₹#{parseInt(product.base_price)}
+                  .js-priceOptions
+                .small
+                  if product.offer_price != product.base_price
+                      span Discount&nbsp;
+                      span.js-discount ₹#{product.base_price - product.offer_price}&nbsp;
+                  span per person
+
+            .content
+              section(id="bookForm")
+                if product.dates.length
+                  .small Choose from Fixed Departures
+                  each date in product.dates
+                    -departure = req.app.get('moment')(date.from_date).format('ll')
+                    label(style="margin-bottom:10px;")
+                      input.js-startDate(type="radio" name="start_date" value="#{checkin}")
+                      .inline-block(style="margin-left:10px;") #{departure}
+                else
+                  label.date-container
+                    .small Pick your Start Date
+                    input.form-control.js-startDate(type="text" placeholder="dd-mm-yyyy" data-date-format="dd-mm-yyyy" name="start_date" value="#{checkin}")
+              section
+                .small Package Cost Calculator/ Group offer
+                .row.text-center
+                  .col-sm-3
+                    div
+                      small Price
+                    .js-offer ₹#{parseInt(product.offer_price)}
+                  .col-sm-5
+                    div
+                      small Travellers
+                    div
+                      input.js-priceFactor.js-count(type="hidden" name="travellers" placeholder="Your Group size" value="#{product.travellers}")
+                      .qty-icon.js-qIcon(data-type="minus") -
+                      .qty.js-quantity #{product.travellers}
+                      .qty-icon.js-qIcon(data-type="plus") +
+                  .col-sm-4
+                    div
+                      small Total
+                    div ₹
+                      span.js-total #{product.travellers * parseInt(product.offer_price)}
+              .js-book.tr-bookNow(data-slug="#{product.slug}")
+                .booking-btn
+                  .err-txt.js-bookStatus
+                  .btn.btn-primary.lg Book Now
+          .card.content.dark(id="queryForm")
+            h4 Send an enquiry about this product
+            form.js-validate-form.row.booking-form
+              input(type="hidden" name="slug" value="#{req.originalUrl}" )
+              input(type="hidden" name="travellers" value="1")
+              input(type="hidden" name="budget" value="#{product.offer_price}")
+              input(type="hidden" name="licensee_product" value="#{product.id}")
+              
+
+              .col-sm-12
+                label Query
+                  textarea.form-control(name="comment" placeholder="Please write your query")
+              .col-sm-12.form-item
+                label Mobile
+                  input.form-control(type="text" placeholder="10 digits to hear from us" name="mobile" data-validate="phone" data-fieldType="phone")
+              .text-center.form-item
+                button.btn.btn-secondary.js-getQuote.js-validate-submit Send Enquiry
+      .col-sm-12(id="gallery")
+        if product.images && product.images.length
+          section
+            h2 Gallery and Images
+            .row
+              -each photo in product.images
+                .col-sm-4
+                  .img-cont
+                    img(src="#{photo.image_url}"  alt="#{photo.caption}")
+      .col-sm-12(id="reviews")
+        section
+          h2 Reviews of our customers
+          div(data-repuso-grid="#{licensee.repuso_grid_number}" data-website-id="#{licensee.repuso_website_id}")
+          script(type="text/javascript" src="https://repuso.com/widgets/grid.js" async)
+
+block js
+  script.
+    TDG.defaultDate = new Date("#{today}");
+    TDG.productPrice = parseInt("#{product.offer_price}");
+    TDG.discount = parseInt("#{product.base_price - product.offer_price}");
+    TDG.plan = parseInt("#{product.plan_id}");
+  script
+    include ../../../public/resources/js/fragments/product.js

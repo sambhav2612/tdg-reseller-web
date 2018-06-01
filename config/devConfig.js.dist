@@ -1,0 +1,62 @@
+var path = require('path'),
+    projectPath = path.normalize(__dirname + '/..');
+
+module.exports={
+  root : require('path').normalize(__dirname + '/..'),
+  app: {
+    name: 'tdg-web'
+  },
+  api : {
+    url : "http://127.0.0.1:8000/api/v1",
+    kosh_url : "http://192.168.1.110:8080/api/v1",
+    tdg_api : "http://192.168.1.1:8080/api/v1"
+  },
+  web :{
+    url : '',
+    css : 'http://',
+    js : 'http://'
+  },
+  oAuth : {
+    facebook : {
+      clientID : '183660295329338',
+      clientSecret : '1823a224977664dc66ad9a5cb2c7066c',
+      callbackURL : 'http://localhost:3000/auth/facebook/cb'
+    },
+    google : {
+          clientID : '-',
+          clientSecret : '-',
+          callbackURL : 'http://127.0.0.1:3000/auth/google/cb'
+        }
+  },
+  analytics : false,
+  logs : {
+    mongo: 'localhost',
+    dir : path.resolve(projectPath, './logs'),
+    accessLogFile: path.resolve(projectPath, './logs/access.log'),
+    applicationLogFile: path.resolve(projectPath, './logs/tdg-web.log'),
+    databaseLogFile: path.resolve(projectPath, './logs/tdg-web.log'),
+    level: "info",
+    maxsize: 20971520
+  },
+  foreign_api : {
+    WEATHER : '',
+    GOKARDE : {
+      appID : '1531da25',
+      appKEY : 'd916a9083154026c72667d359c49443c'
+    }
+  },
+  tourboks_api : {
+    URL : 'https://api.staging.tourboks.com/v1.04',
+    USERNAME : 'Traveldglobe',
+    PASSWORD : 'Tr@v3lGlob3'
+  },
+  rzp : {
+    KEY : 'rzp_test_',
+    SECRET : 'test'
+  },
+
+  port:3000,
+  host: 'http://localhost:3000',
+  static: 'http://localhost:3000',
+  env : 'dev'
+}

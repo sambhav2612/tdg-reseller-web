@@ -1,0 +1,50 @@
+-licensee = result.licensee
+- pages = result.pages
+div
+  .light-top-header.hidden-xs
+    .row
+      .content-wrapper
+        .col-sm-6.contact
+          .item
+            i.fa.fa-phone(style='font-size: 16px;margin-right: 5px;')
+            span.span(style="margin-left:5px")  +91-#{licensee.mobile}
+          .item
+            i.fa.fa-envelope-o(style='font-size: 16px;margin-left: 30px;margin-right: 10px;')
+            span.span(style="margin-left:5px") #{licensee.email}
+        .col-sm-6.text-right
+          .tour-light-top-bar-right-social
+            a.tour-light-top-bar-social-icon(href="https://www.facebook.com/#{licensee.facebook}", target='_blank', title='facebook')
+              i.fab.fa-facebook
+            a.tour-light-top-bar-social-icon(href="https://www.instagram.com/#{licensee.instagram}", target='_blank', title='instagram')
+              i.fab.fa-instagram
+            a.tour-light-top-bar-social-icon(href="https://www.pinterest.com/#{licensee.pinterest}", target='_blank', title='pinterest')
+              i.fab.fa-pinterest
+            a.tour-light.social-icon(href='https://www.twitter.com/#{licensee.twitter}', target='_blank', title='twitter')
+              i.fab.fa-twitter
+header.row
+    .content-wrapper
+      .col-sm-3
+        a.logo.hidden-xs(href='/')
+          img(src='#{licensee.image_url}', alt='#{licensee.name}')
+          .title #{licensee.name}
+
+      .col-sm-9.text-right
+        nav.greedy-nav
+          button.hidden(count='0')
+            .hamburger
+          ul.navigation.visible-links
+            li.menu-item
+              a(href='/') Home
+            li.menu-item
+              a(href='/plan') Tours
+            li.menu-item
+              a(href='/blog') Blog
+            //li.menu-item
+              a(href='/event') Events
+            for page, index in pages
+              if index < 5
+                li.menu-item
+                  a(href="/page/#{page.slug}") #{page.title}
+
+
+

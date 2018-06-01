@@ -1,0 +1,19 @@
+mixin productList(plans, products)
+   -products = products || 6
+   - each plan, index in plans
+      if index < products
+         div(class="col-sm-4 js-cards" data-location="#{plan.location.name}" data-price="#{plan.offer_price>2000? plan.offer_price>5000?'Above ₹5000':'₹2000 - ₹5000':'Under ₹2000'}")
+            a.card.product-tile.tr-product(href="#{host + plan.url}" title="Book #{plan.name}")
+              .img-cont
+                img(src="#{plan.thumb_url}" alt="#{plan.name}")
+              .content
+                h3.link.ellipsis #{plan.name}
+                div #{plan.duration}
+                .price
+                  .offer ₹#{plan.offer_price}
+                  if plan.offer_price != plan.base_price
+                    .base-price ₹#{plan.base_price}
+                    div
+                      small You save ₹#{plan.base_price - plan.offer_price}
+                if plan.altitude > 6000
+                  .altitude #{plan.altitude} feet

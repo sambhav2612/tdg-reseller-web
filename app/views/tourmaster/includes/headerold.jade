@@ -1,0 +1,46 @@
+-licensee = result.licensee
+- pages = result.pages
+
+header.site-header.row(role='banner')
+  .content-wrapper
+    .col-sm-2.col-xs-3
+      a(href="/"  title="Home")
+        img(style="width:100%;max-width:85px;border-radius:100%" src="https://graph.facebook.com/#{licensee.facebook}/picture?type=large")
+
+    .col-sm-10.text-right.hidden-xs
+      div
+        a.btn.btn-ghost(style="margin:10px;" href="/plan" title="Best tour deals") Tours
+        a.btn.btn-ghost(style="margin:10px;" href="/#contact" title="Contact") Contact
+        a.btn.btn-ghost(style="margin:10px;" href="/blog" title="Blog") Blog
+        a.btn.btn-ghost(style="margin:10px;" href="/#reviews" title="Testimonial") Testimonial
+        a.btn.btn-ghost(style="margin:10px;" href="/#choose" title="Why choose us") Why Choose Us
+        a.btn.btn-ghost(style="margin:10px;" href="/#contact" title="Enquire") Enquire
+
+      div Contact Us at&nbsp;
+        a(href="tel:+91#{licensee.mobile}") +91-#{licensee.mobile}
+    .col-xs-9.text-right.visible-xs
+      div
+        a.btn.btn-ghost(href="#contact" title="Contact") Contact
+        a.btn.btn-ghost(href="/blog" title="Blog") Blog
+      div Contact Us at&nbsp;
+        a(href="tel:+91#{licensee.mobile}") +91-#{licensee.mobile}
+    if home
+      .col-xs-12(style="min-height: 160px;")
+        .site-branding
+          h1.site-title #{licensee.name}
+          p.site-description.hidden-xs #{licensee.tagline}
+        // .site-branding
+        #site-navigation-wrapper
+          nav#site-navigation.main-navigation(role='navigation')
+            .menu-primary-container
+              ul#primary-menu.menu
+                li.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-home.current-menu-item.page_item.page-item-2.current_page_item.menu-item-12
+                  a(href='/') Home
+                li.menu-item.menu-item-type-post_type.menu-item-object-page
+                  a(href='/blog') Blog
+                for page, index in pages
+                  if index < 5
+                    li.menu-item.menu-item-type-post_type.menu-item-object-page
+                      a(href="/page/#{page.slug}") #{page.title}
+
+

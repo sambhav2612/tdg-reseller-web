@@ -1,0 +1,52 @@
+
+extends ../layouts/default
+
+block css
+   style
+      include ../../../public/resources/css/static.css
+
+block mainContent
+   - user = result.user
+   .row
+      .static-header
+         h1.static-title #{user.user_name}
+      .content-wrapper
+         .col-xs-12
+            .row
+               .col-sm-3
+                  .img-circle(style="border-radius: 100%;overflow: hidden;max-width: 150px;margin: 0 auto;")
+                     img(src="http://graph.facebook.com/#{user.facebook}/picture?type=large " alt="#{user.user_name}" style="width:100%")
+               .col-sm-9
+                  h1 About #{user.user_name} -#{user.blogger? 'Traveller & Blogger' : 'Traveller'}
+                  .caption
+                     .inline-block(style="margin-right:15px;")
+                        a(href="http://www.facebook.com/#{user.facebook}" itemprop="user" target="_blank") Facebook
+                     if user.twitter
+                        .inline-block
+                           a(href="https://www.twitter.com/#{user.twitter}" itemprop="user" target="_blank") Twitter
+                  p #{user.bio}
+
+            h2 Top recent posts
+            .row
+               each blog in user.blogs
+                  .col-sm-4
+                     a.card.blog-tile(href="#{host}/blog/#{blog.slug}")
+                        if blog.thumb_url
+                           .img-cont
+                              img(src="#{blog.thumb_url}" alt="cover for #{blog.title}")
+                        .content
+                           h2 #{blog.title}
+                           - last_update = req.app.get('moment')(blog.updated_at).format('ll')
+                           .caption Last update: #{last_update}
+               .col-sm-4
+                  a.add-blog-holder(href="/add-blog")
+                     mixin paintIcon('writeBlog', {size: {y : '70',x : '70'}})
+                     div Post your travel story
+
+
+
+
+
+
+
+

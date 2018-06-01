@@ -1,0 +1,108 @@
+//
+ Created by Himanshu wolf on 06/10/16.
+extends ../layouts/default
+
+append vars
+- dtLyr.pageType = req.app.get('pageConstants').PRODUCT_CHECKOUT.identifier
+- noIndex = true
+
+block css
+   style
+      include ../../public/resources/css/checkout.css
+block mainContent
+   - licensee = result.licensee
+   - isFailure = req.query.failure
+   - amount = req.query.amount || 0
+   - amount = amount<0 ? amount*-1 :amount
+   - itinerary_code = req.query.ref
+   if isFailure
+     .col-sm-12.text-center
+       h4(style="color:#ee3300") Something went wrong. Please try again.
+   .content-wrapper.sm
+     .col-sm-12
+       .booking-form.card.content
+         .hide.js-price #{amount}
+         h2 Place your booking
+         h4 We everyone at #{licensee.name} will take care of everything, you just have to do this
+         //if user_info
+         //   form.form.form-validation(method="post" action="/booking")
+         //      input.js-quantityField(type="hidden" name="quantity" value="#{user_info.quantity}")
+         //      .row
+         //         .col-sm-12
+         //            .form-group.control-group
+         //               input.form-control( data-rule-required="true" name="firstname" placeholder="Name" type="text" value="#{user_info.firstname}")
+         //      .row
+         //         .col-sm-6
+         //            .form-group.control-group
+         //               input.form-control( data-rule-required="true" data-rule-email="true" name="email" placeholder="Email" type="email" value="#{user_info.email}")
+         //         .col-sm-6
+         //            .form-group.control-group
+         //               input.form-control( data-rule-required="true" name="phone" placeholder="Mobile no." type="tel" value="#{user_info.phone}")
+         //      .row
+         //         .col-sm-12
+         //            .form-group.control-group
+         //               textarea.form-control( row="2" data-rule-required="true" name="address_line1" placeholder="Your address goes here...") #{user_info.address_line1}
+         //      .row
+         //         .col-sm-6
+         //            .form-group.control-group
+         //               input.form-control( data-rule-required="true" name="city" placeholder="City" type="text" value="#{user_info.city}")
+         //         .col-sm-6
+         //            .form-group.control-group
+         //               input.form-control( data-rule-required="true" name="state" placeholder="State" type="text" value="#{user_info.state}")
+         //      .row
+         //         .col-sm-12
+         //            .form-group.control-group
+         //               input.form-control( data-rule-required="true" name="zipcode" placeholder="Pincode" type="text" value="#{user_info.zipcode}")
+         //      .row
+         //         .col-sm-6 Shipping Address
+         //         .col-sm-6.text-right
+         //            label(style="margin-left:5px;")
+         //               input.js-shipCheck(type="checkbox" style="margin-right:5px;")
+         //               span Same as Billing Address
+         //
+         //      .row
+         //         .col-sm-12
+         //            button.btn.btn-contrast.btn-block(data-loading-text="Sending..." type="submit") Proceed to Pay
+         //else
+         form.js-validate-form.row(method="post" action="/pay")
+           input(type="hidden" name="travellers" data-validate="number" data-fieldType="number" value="1")
+           .col-sm-6.col-sm-offset-3.form-item
+             label.date-container Amount to Pay
+               span.mandatory *
+               input.form-control.lg(type="tel" data-validate="empty, number" data-fieldtype="number" placeholder="Enter in INR" name="price" value="#{amount}")
+           .col-sm-6.col-sm-offset-3.form-item
+             label.date-container Itinerary Code
+               span.mandatory *
+               input.form-control(name="itinerary_code" placeholder="TDG-005-105" value="#{itinerary_code}" data-validate="empty" data-fieldType="name")
+           .col-sm-6.form-item
+             label Name
+               span.mandatory *
+               input.form-control(type="text" placeholder="Your name goes here" name="firstname" data-validate="empty" data-fieldType="name")
+           .col-sm-6.form-item
+             label Email
+               span.mandatory *
+               input.form-control(type="email" placeholder="Your email, please" name="email" data-validate="empty,email" data-fieldType="email")
+           .col-sm-6.form-item
+             label Mobile
+               span.mandatory *
+               input.form-control(type="text" placeholder="10 digits to hear from us" name="phone" data-validate="empty,phone" data-fieldType="phone")
+           .col-sm-6.col-sm-offset-3.form-item
+             button.btn.btn-primary.lg.js-validate-submit.form-control(type="submit") Book and Pay
+         .text-center
+           .ticks Secure Payment
+           .ticks Guaranteed Standards
+           .ticks Immediate Contact
+           div All Credit Cards/ Debit Cards /Net Banking are accepted
+block js
+   script.
+      (function() {
+      var el = {
+      $priceField : $('[name="price"]')
+      }, price = parseInt($('.js-price').text());
+      el.$priceField.change(function() {
+        var $this = $(this), newPrice = $this.val();
+        if(!newPrice || newPrice < 0 ){
+          $this.val(price);
+      }
+      })
+      })();

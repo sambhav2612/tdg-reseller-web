@@ -1,0 +1,24 @@
+extends ../layouts/default
+
+block css
+  style.
+    .blog-tile{
+      overflow: hidden;
+      margin: 0 20px 50px 0;
+      text-align: center;
+      min-height: 130px;
+      max-height: 130px;
+    }
+    .content{
+      padding: 10px;
+      overflow: hidden;
+    }
+
+block mainContent
+  - blogs = result.blogs
+  .container
+    for blog in blogs
+      .col-sm-6
+        a.card.blog-tile(href="/blog/#{blog.slug}" style="overflow:hidden")
+          .content
+            h2 #{blog.title}

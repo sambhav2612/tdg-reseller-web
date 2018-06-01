@@ -1,0 +1,59 @@
+.blank {
+  position:fixed;
+  top: 26%;
+  left: 0%;
+  z-index:300;
+}
+
+.blankproduct{
+  position:fixed;
+  top: 26%;
+  left: 0%;
+  z-index:300;
+}
+
+.share a {
+  position: relative;
+  display: block;
+  width:45px;
+  height:45px;
+  text-align: center;
+  color: white;
+  text-decoration: none;
+  transition: 0.5s;
+}
+.share a i {
+  font-size:20px;
+  line-height:48px;
+}
+.share a:after {
+  position: absolute;
+  content: "";
+  top:0;
+  left:0;
+  width: 10%;
+  height: 100%;
+  background: rgba(0,0,0,0.25);
+  transition: 0.5s;
+}
+.share a:before {
+  padding-left:10%;
+  transition: 0.5s;
+  font-size: 24px;
+  line-height: 60px;
+}
+.share a:hover {
+  border-radius: 100% 100% 0 100%;
+
+}
+.share a:hover:after {
+  width: 80%;
+  height: 80%;
+  top: 10%;
+  left: 10%;
+  border-radius: 100%;
+}
+.share .fb {background:#3b5998}
+.share .vk {background:#4c75a3}
+.share .tt {background:#0084b4}
+.share .gp {background:#dd4b39}

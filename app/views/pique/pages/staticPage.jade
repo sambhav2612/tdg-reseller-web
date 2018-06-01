@@ -1,0 +1,30 @@
+extends ../layouts/default
+block css
+block mainContent
+  - page = result.page
+  .col-sm-12
+    .text-center
+      h1 #{page.title}
+    .row
+      .col-sm-3.hidden-xs
+        .widget-area
+          aside.widget
+            h2.widget-title Follow Blog via Email
+            div Enter your email address to follow this blog and receive notifications of new posts by email.
+            form#subscribe-blog(action='', method='post', accept-charset='utf-8')
+              input#subscribe-field(type='text', name='email', style='width: 95%; padding: 1px 2px', placeholder='Enter your email address', value='')
+              input(type='hidden', name='action', value='subscribe')
+              input(type='hidden', name='blog_id', value='116233973')
+              input(type='hidden', name='source', value='')
+              input(type='hidden', name='sub-type', value='widget')
+              input(type='hidden', name='redirect_fragment', value='blog_subscription-3')
+              input#_wpnonce(type='hidden', name='_wpnonce', value='2c2929c1d8')
+              input(type='submit', value='Follow us')
+          //aside.widget
+            h2.widget-title Instagram
+            div
+              a#link-e76974d6cc5694502c4c72b6f1d99120467220ee51b391f6410a9f30fbefc14a(href='https://instawidget.net/v/user/#{result.licensee.instagram}') @#{result.licensee.instagram}
+              script(src='https://instawidget.net/js/instawidget.js?u=e76974d6cc5694502c4c72b6f1d99120467220ee51b391f6410a9f30fbefc14a&width=300px')
+      .col-sm-9
+        !{page.content}
+block js

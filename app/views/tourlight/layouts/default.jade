@@ -1,0 +1,36 @@
+doctype html
+
+include ../../metaMixin
+include ../mixins/iconMixin
+include ../mixins/paginationMixin
+include ../mixins/productMixin
+
+
+html(lang="en")
+  - cannonical = "http://" + result.licensee.domain + req.path
+  - seo_title = result.licensee.seo_title
+  - seo_desc = result.licensee.seo_desc
+  - seo_keywords = result.licensee.seo_keywords
+  block vars
+
+  include ../../head
+
+  body
+
+    #content-container.container-fluid
+
+      - if (!hideHeader){
+        include ../includes/header
+      -}
+
+      .row.main-content
+        .col-xs-12
+          block mainContent
+
+      - if (!hideFooter){
+        include ../includes/footer
+      -}
+      .fixed-overlay.hide.hidden-xs
+
+  include ../../foot
+  block js

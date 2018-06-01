@@ -1,0 +1,19 @@
+nav.mbl-menu-container.visible-xs(role='navigation')
+   .hamburger.js-hamburger
+      i.fas.fa-align-justify
+   .cross.js-cross
+      i.fas.fa-times
+      .mbl-menu
+         ul
+            a(href='/')
+               li Home
+            a(href='/blog')
+               li Blog
+            a(href='/plan')
+               li Tours
+            a(href='/event')
+               li Upcoming Events
+            for page, index in pages
+               if index < 5
+                  a(href="/page/#{page.slug}")
+                     li #{page.title}

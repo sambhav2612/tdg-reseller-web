@@ -1,0 +1,26 @@
+extends ../layouts/default
+append appendVars
+   - seo_title = `Recent Blog Posts from ${result.licensee.name}.`
+   - seo_desc = `Read our blog Posts written by amazing people who love to travel and explore new places | ${result.licensee.name}.`
+
+block css
+  style.
+    .blog-tile{
+      overflow: hidden;
+    }
+    .content{
+      padding: 10px;
+      overflow: hidden;
+    }
+
+block mainContent
+  - blogs = result.blogs
+  .container
+    if blogs.length
+      for blog in blogs
+        .col-sm-6
+          a.card.blog-tile(href="/blog/#{blog.slug}" style="overflow:hidden")
+            .img-cont
+              img.lazy(src="#{blog.thumb_url}" alt="#{blog.title}")
+            .content
+              h4.ellipsis #{blog.title}

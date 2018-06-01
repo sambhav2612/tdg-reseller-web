@@ -1,0 +1,56 @@
+-licensee = result.licensee
+- pages = result.pages
+- products = result.products
+- tags = result.tags
+header.header.row(role='banner')
+  .container
+    include ../../includes/mobileNav
+    .header__info.hidden-xs
+      .header__info__items-left
+        .header__info__item.header__info__item--phone
+          i.fa.fa-phone(style='font-size: 16px;color: #ffffff;margin-right: 10px;')
+          a(href="tel:+91#{licensee.mobile}") +91-#{licensee.mobile}
+        .header__info__item.header__info__item--clock
+          i.fa.fa-envelope(style='font-size: 16px;color: #ffffff;margin-left: 30px;margin-right: 10px;')
+          span.span(style="margin-left:5px") #{licensee.email}
+      .header__info__items-right
+        .header__info__item.header__info__item--delimiter.header__info__item--social-icons
+          a(href='http://facebook.com')
+            i.fab.fa-facebook
+          a(href='http://twitter.com')
+            i.fab.fa-twitter
+          a(href='http://pinterest.com')
+            i.fab.fa-pinterest
+          a(href='http://instagram.com')
+            i.fab.fa-instagram
+    .header__content-wrap
+      .row
+        .col-md-12.header__content
+          .logo.logo--image
+            a#logoLink(href='/')
+              if licensee.image_url
+                  img(style="width:100%;max-width:85px;border-radius:100%" src="#{licensee.image_url}" alt="#{licensee.name}")
+              else
+                img(style="width:100%;max-width:85px;border-radius:100%" src="https://graph.facebook.com/#{licensee.facebook}/picture?type=large")
+          nav.main-nav-header(role='navigation')
+            ul#navigation.main-nav
+              li#menu-item-152.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-home.menu-item-152
+                a(href='/#') Home
+              li
+                if tags
+                  a(href='/plan') Tours ▾
+                  ul.dropdown
+                    each tours, tag in tags
+                      li
+                        a( href='#') &#9666; #{tag}
+                        ul.dropdown-submenu
+                          each tour in tours
+                            li
+                              a(href='/plan/#{tour.slug}') #{tour.name}
+                else
+                  a(href='/plan') Tours
+              li#menu-item-923.menu-item.menu-item-type-custom.menu-item-object-custom.menu-item-has-children.menu-item-923
+                a(href='/event') Upcoming Trips
+              li#menu-item-921.menu-item.menu-item-type-custom.menu-item-object-custom.menu-item-has-children.menu-item-921
+                a(href='/blog') Blog
+          .clearfix

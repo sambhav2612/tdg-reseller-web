@@ -1,0 +1,23 @@
+doctype html
+
+include ../mixins/iconMixin
+include ../mixins/metaMixin
+include ../mixins/paginationMixin
+include ../mixins/productMixin
+
+
+html
+
+
+  head
+    meta(name="viewport" content="width=device-width")
+    style
+      include ../../public/resources/css/TDG.css
+    block css
+  body
+
+    #content-container.container-fluid
+      .row.main-content
+        .col-xs-12
+          block mainContent
+  block js

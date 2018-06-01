@@ -1,0 +1,31 @@
+//
+   Created by Himanshu wolf on 29/03/17.
+
+extends ../layouts/default
+block css
+   style
+      include ../../../public/resources/css/checkout.css
+block mainContent
+   - product = result.product || result.event
+   - isFailure = req.query.failure
+   - travel_date = req.query.travel_date || ''
+   - travellers = req.query.travellers || 1
+   if product.start_date
+      - start_date = req.app.get('moment')(product.start_date*1000)
+   if isFailure
+      .col-sm-12.text-center
+         h4(style="color:#ee3300") Something went wrong. Please try again.
+   if product
+      include ../../includes/hasBooking.jade
+   else
+      .text-center
+         h1 No Travel Plans Yet?
+         div
+            a.btn.btn-primary.lg(href="/" title="Add Popular treks") Add Popular treks
+block js
+      script(src='https://checkout.razorpay.com/v1/checkout.js')
+      script.
+        TDG.rzp_name = "#{product.name}";
+        TDG.rzp_desc = "#{product.licensee.name}";
+      script
+         include ../../../public/resources/js/fragments/razorpay.js

@@ -1,0 +1,45 @@
+extends ../layouts/default
+
+block css
+  style.
+      .traveltour-page-title-wrap{ 
+        background-image: url('https://cdn.goodlayers.com/traveltour/wp-content/themes/traveltour/images/page-title-background.jpg'); 
+        background-position: center; 
+        background-size: cover; 
+        position: relative; }
+      .traveltour-page-title-wrap 
+      .traveltour-page-title-wrap .traveltour-page-title-container{ position: relative; }
+      .traveltour-page-title-wrap .traveltour-page-title{ text-transform: uppercase; letter-spacing: 2px; }
+
+      .traveltour-page-title-wrap.traveltour-style-small .traveltour-page-title{ font-size: 37px; margin-bottom: 0px; }
+      .traveltour-page-title-wrap.traveltour-style-small .traveltour-page-caption{ font-size: 16px; margin-top: 13px; }
+      .traveltour-page-title-wrap.traveltour-style-small .traveltour-page-title-content{ padding-top: 93px; padding-bottom: 87px; }
+
+      .traveltour-page-title-wrap.traveltour-style-medium .traveltour-page-title{ font-size: 54px; margin-bottom: 0px; }
+      .traveltour-page-title-wrap.traveltour-style-medium .traveltour-page-caption{ font-size: 19px; margin-top: 13px; }
+      .traveltour-page-title-wrap.traveltour-style-medium .traveltour-page-title-content{ padding-top: 126px; padding-bottom: 116px; }
+          }
+
+block mainContent
+  - blogs = result.blogs
+  .header-section.header-section--with-banner.parallax-section.parallax-section--header.row
+    .parallax-image(style='background-image: url("https://cdn.goodlayers.com/traveltour/wp-content/themes/traveltour/images/page-title-background.jpg"); background-repeat: no-repeat; background-position:0 0; background-size: cover')
+      .container
+        .breadcrumbs
+          ul
+            li
+              a(href='/') Home
+            li Blog
+        .header-section__content
+          h1.header-section__title Recent Blog Post
+          p.header-section__description We share stories and give advice
+  .row
+    for blog in blogs
+      .col-sm-6
+        a.card.blog-tile(href="/blog/#{blog.slug}" style="overflow:hidden")
+          .img-cont
+            img(src="#{blog.thumb_url}" alt="#{blog.title}")
+          .content
+            h2 #{blog.title}
+
+       

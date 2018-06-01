@@ -1,0 +1,52 @@
+extends ../layouts/default
+
+append appendVars
+   - seo_title = result.blog.seo_title || result.blog.title
+   - seo_desc = result.blog.seo_desc || result.blog.title
+   - thumb_url = result.blog.thumb_url
+   -url = host + req.originalUrl
+
+block css
+  style
+    include ../../../public/resources/css/shareIcons.css
+
+block mainContent
+  - blog = result.blog
+  .container.container-600.card
+    .content
+        .blank.hidden-xs(style="position: fixed") 
+            .share
+              a.fb(href= "https://www.facebook.com/share.php?u=https://#{licensee.domain+'/blog/'+ blog.slug}" target="_blank")
+                i.fa.fa-facebook
+              //a.vk(href='https://www.facebook.com')
+                i.fa.fa-vk
+              a.tt(href= "http://twitter.com/share?text=#{blog.title}&url=https://#{licensee.domain+'/blog/'+ blog.slug}" target="_blank")
+                i.fa.fa-twitter
+              a.gp(href= "https://plus.google.com/share?url=https://#{licensee.domain+'/blog/'+ blog.slug}" title="Share on Google+" channel="google" element="Widget" class="tr-share social-connect-link google js-social-refer" target="_blank")
+                i.fa.fa-google-plus
+              |share
+      div!=blog.content
+          .row
+            .social(style="float: right; margin-right: 5px;")
+              b Share on social media
+              .a2a_kit.a2a_kit_size_32.a2a_default_style
+                 a.a2a_dd(href='https://www.addtoany.com/share')
+                 a.a2a_button_facebook
+                 a.a2a_button_twitter
+                 a.a2a_button_linkedin
+                 a.a2a_button_pinterest
+               script(async='', src='https://static.addtoany.com/menu/page.js')
+        .row
+          #fb-root  
+            .fb-comments(data-href="https://#{licensee.domain+'/blog/'+ blog.slug}" data-width="100%" data-numposts='5')
+    
+
+block js
+script.
+  (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.12';
+  fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));

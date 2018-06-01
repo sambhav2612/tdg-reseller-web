@@ -1,0 +1,18 @@
+div(style="padding-top:50px;text-align:center;")
+
+   h4 We are processing your booking
+   div
+      img(src="#{static}/resources/images/payment-loader.gif")
+   h4(style="text-align:center;") This process may take some time, please do not hit refresh or back button or close the window.
+
+   form(method="POST", action="#{result.request.request_url}" style="display:none;")
+      -each value, key in result.request.request_data
+         input(type="hidden" name="#{key}" value="#{value}")
+      .hidden
+         input(type="submit" name="submit" value="")
+
+script(type="text/javascript", src="#{static}/resources/js/lib/jquery-1.11.2.min.js")
+script.
+   $('[name="submit"]').trigger('click');
+
+

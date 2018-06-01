@@ -1,0 +1,48 @@
+mixin metaDescription(result)
+  if(typeof result !== 'undefined')
+    meta( name="description" content="#{result}")
+
+mixin metaKeywords(result)
+  if(typeof result !== 'undefined')
+    meta( name="keywords" content="#{result}")
+
+mixin metaTitle(result)
+  if(typeof result !== 'undefined')
+    title(itemprop='name') #{result}
+
+mixin metaOG(seo_title, seo_desc, seo_keywords, licensee, cannonical, author, thumb_url)
+  meta(property="og:type" content="website")
+  meta(property="og:site_name" content="#{licensee.name}")
+  meta(property="og:title" content="#{seo_title || licensee.seo_title}")
+  meta(property="og:description" content="#{seo_desc || licensee.seo_desc}")
+  meta(property="og:image" content="#{thumb_url || licensee.images[0].thumb_url}")
+  meta(property="og:locale" content="en_US")
+  meta(name="twitter:card" content="summary_large_image")
+  meta(name="twitter:title" content="#{seo_title}")
+  meta(name="twitter:description" content="#{seo_desc || licensee.seo_title}")
+  meta(name="twitter:image:alt" content="Image for #{seo_data.title}")
+
+
+mixin createLocationMeta(location)
+  div #{location.name} #{location.aka.length ? 'or '+location.aka[0]: ''} is a #{location.type} located in #{location.state? location.state.name+', '+location.state.region.name: ''} #{location.country.name}. #{location.name} is also known as&nbsp;
+    each cannonical, index in location.aka
+      .inline-block #{cannonical},&nbsp;
+    .inline-block Planning to travel to #{location.name}? Know the weather conditions and the best time to visit #{location.name} is&nbsp;
+    each month, index  in location.months
+      .inline-block #{month.name}#{index===location.months.length-1? '.': ','}&nbsp;
+    .inline-block The ecosystem and topography of #{location.name} is ideal for travel. On your visit to #{location.name} you  should ideally stay here for #{location.ideal_stay_time}. Traveller who are interested in activities for&nbsp;
+      each interest,index in location.interests
+        .inline-block #{interest.name}#{index===location.interests.length-1? '.': ','}&nbsp;
+
+    p The most used regional language in #{location.name} is #{location.language.name}. To take care of your travel expenses and cost, the currency you will need is #{location.currency.name}(#{location.currency.code})
+    p The love for food is the soul of travelling, the different food types available in #{location.name} are&nbsp;
+      each food, index in location.food_availabilities
+        .inline-block #{food.name}#{index === location.food_availabilities.length - 1 ? '' : ','}&nbsp;
+    p You have every reason to travel to #{location.name}, !{location.desc}
+    p All the places to see and tourist activities are listed here.
+      each activity, index in location.activities
+        .inline-block
+          strong ##{activity.name}
+        .inline-block (#{activity.type}),&nbsp;
+
+    p Create you travel plan and package for #{location.name}, pick places to visit, things to do, food to eat, places to stay whether hotel, hostels or camps, right here at your most trusted travel guide and itinerary planner for India and South East asia travel.

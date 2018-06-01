@@ -1,0 +1,143 @@
+@import '../variables';
+@import '../base';
+@import '../list';
+@import "../fragments/button";
+@import "../fragments/form";
+@import '../fragments/header';
+@import '../fragments/footer';
+@import '../fragments/card';
+@import '../mixins/allMixin';
+
+.inactive {
+  opacity: 0.5;
+}
+
+.title {
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.link {
+  color: @pallet-color-link;
+}
+.highlight {
+  color: @pallet-color-important;
+}
+
+.small {
+  font-size: @font-small;
+}
+.hand {
+  cursor: pointer;
+}
+
+.fact {
+  font-size: @font-large;
+  font-style: italic;
+}
+.autocomplete-suggestions {
+  box-shadow: 0 1px 5px 0 @pallet-border-primary;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  .autocomplete-suggestion {
+    background: fade(@pallet-background-light, 90%);
+    padding: @padding-base @padding-medium;
+    color: @pallet-color-primary;
+    position: relative;
+    left: 1px;
+    cursor: pointer;
+    .model {
+      float: right;
+      background: @pallet-background-landing;
+      color: #fff;
+      text-transform: capitalize;
+      min-width: 55px;
+      text-align: center;
+      font-size: 8px;
+      &.food_ {
+        background: @pallet-model-food;
+      }
+      &.souvenir_ {
+        background: @pallet-model-souvenir;
+      }
+      &.activity_ {
+        background: @pallet-model-activity;
+      }
+      &.blog_ {
+        background: @pallet-model-blog;
+      }
+      &.state_,&.country_ {
+        background: @pallet-model-region;
+      }
+      &.destination_ {
+        background: @pallet-model-destination;
+      }
+    }
+  }
+  div.autocomplete-selected {
+    font-weight: 600;
+    background-color: @pallet-background-primary;
+  }
+}
+.trip-ad {
+  display: none;
+}
+
+.what-we-do {
+  color: @pallet-color-light;
+
+  &.where {
+    background: #43A047;
+  }
+  &.how {
+    background: #FF7043;
+  }
+  &.plan {
+    background: #1976D2;
+  }
+  &.card.round {
+    border: none;
+    .content {
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      -webkit-transform: translateX(-50%) translateY(-50%);
+    }
+  }
+}
+
+.dest-tile {
+  box-shadow: none;
+
+  .img-cont {
+    position: relative;
+    padding-bottom: 67%;
+    overflow: hidden;
+    white-space: nowrap;
+    .placeholder;
+
+    img {
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      z-index: @index-ground;
+      transition: all 0.3s 0s ease-in;
+    }
+  }
+  .tag-title {
+    font-family: cursive;
+    text-transform: capitalize;
+  }
+  section {
+   margin-bottom: @margin-large;
+  }
+  &:hover {
+    box-shadow: 0 0 1px 1px @pallet-border-secondary;
+
+    img {
+      transform: scale(1.08,1.09)
+    }
+  }
+}
+
+

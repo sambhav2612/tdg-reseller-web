@@ -1,0 +1,298 @@
+extends ../layouts/default 
+
+block mainContent
+  -licensee = result.licensee
+  -products = result.products
+  -blogs = result.blogs
+  .traveltour-body-outer-wrapper.row
+    .traveltour-body-wrapper.clearfix.traveltour-with-transparent-header.traveltour-with-frame
+      #traveltour-page-wrapper.traveltour-page-wrapper
+        div
+          div
+          .tourmaster-single-header.tourmaster-start-script(style='background-image: url("#{licensee.images[0].image_url}");')
+            .tourmaster-single-header-background-overlay
+            .tourmaster-single-header-top-overlay
+            .tourmaster-single-header-overlay
+            .tourmaster-single-header-container.tourmaster-container
+              .tourmaster-single-header-container-inner
+                .tourmaster-single-header-title-wrap.tourmaster-item-pdlr
+                  h1.tourmaster-single-header-title  #{licensee.name}
+                  h4.tourmaster-single-header-para(style="color: #bfb1b1") #{licensee.tagline}
+          .gdlr-core-pbf-wrapper(style='padding: 60px 0px 10px 0px;')
+            .gdlr-core-pbf-background-wrap(style='background-color: #ffffff;')
+              div(class="gdlr-core-pbf-background gdlr-core-parallax gdlr-core-js")
+            .gdlr-core-pbf-wrapper-content.gdlr-core-js
+              .gdlr-core-pbf-wrapper-container.clearfix.gdlr-core-container
+                .gdlr-core-pbf-column.gdlr-core-column-15.gdlr-core-column-first
+                  .gdlr-core-pbf-column-content-margin.gdlr-core-js
+                    .gdlr-core-pbf-column-content.clearfix.gdlr-core-js
+                      .gdlr-core-pbf-element
+                        .gdlr-core-column-service-item.gdlr-core-item-pdb.gdlr-core-center-align.gdlr-core-no-caption.gdlr-core-item-pdlr(style='padding-bottom: 30px;')
+                          .gdlr-core-column-service-media.gdlr-core-media-image(style='margin-bottom: 30px;')
+                            img(src='https://cdn.goodlayers.com/traveltour/wp-content/uploads/2017/01/icon-13.png', alt='', width='44', height='44')
+                          .gdlr-core-column-service-content-wrapper
+                            .gdlr-core-column-service-title-wrap(style='margin-bottom: 10px;')
+                              h3.gdlr-core-column-service-title(style='font-size: 16px;text-transform: none;color:black ; color: black') 500+ Destinations
+                .gdlr-core-pbf-column.gdlr-core-column-15
+                  .gdlr-core-pbf-column-content-margin.gdlr-core-js
+                    .gdlr-core-pbf-column-content.clearfix.gdlr-core-js
+                      .gdlr-core-pbf-element
+                        .gdlr-core-column-service-item.gdlr-core-item-pdb.gdlr-core-center-align.gdlr-core-no-caption.gdlr-core-item-pdlr(style='padding-bottom: 30px;')
+                          .gdlr-core-column-service-media.gdlr-core-media-image(style='margin-bottom: 28px;')
+                            img(src='https://cdn.goodlayers.com/traveltour/wp-content/uploads/2016/06/icon-2.png', alt='', width='41', height='49')
+                          .gdlr-core-column-service-content-wrapper
+                            .gdlr-core-column-service-title-wrap(style='margin-bottom: 5px;')
+                              h3.gdlr-core-column-service-title(style='font-size: 16px;text-transform: none;color:black;color: black') Best Price In The Industry
+                .gdlr-core-pbf-column.gdlr-core-column-15
+                  .gdlr-core-pbf-column-content-margin.gdlr-core-js
+                    .gdlr-core-pbf-column-content.clearfix.gdlr-core-js
+                      .gdlr-core-pbf-element
+                        .gdlr-core-column-service-item.gdlr-core-item-pdb.gdlr-core-center-align.gdlr-core-no-caption.gdlr-core-item-pdlr(style='padding-bottom: 30px;')
+                          .gdlr-core-column-service-media.gdlr-core-media-image(style='margin-bottom: 30px;')
+                            img(src='https://cdn.goodlayers.com/traveltour/wp-content/uploads/2017/01/icon-14.png', alt='', width='35', height='45')
+                          .gdlr-core-column-service-content-wrapper
+                            .gdlr-core-column-service-title-wrap(style='margin-bottom: 5px;')
+                              h3.gdlr-core-column-service-title(style='font-size: 16px;text-transform: none;color: black') Great Customer Support
+                .gdlr-core-pbf-column.gdlr-core-column-15
+                  .gdlr-core-pbf-column-content-margin.gdlr-core-js
+                    .gdlr-core-pbf-column-content.clearfix.gdlr-core-js
+                      .gdlr-core-pbf-element
+                        .gdlr-core-column-service-item.gdlr-core-item-pdb.gdlr-core-center-align.gdlr-core-no-caption.gdlr-core-item-pdlr(style='padding-bottom: 30px;')
+                          .gdlr-core-column-service-media.gdlr-core-media-image(style='margin-bottom: 35px;')
+                            img(src='https://cdn.goodlayers.com/traveltour/wp-content/uploads/2016/06/icon-4.png', alt='', width='35', height='38')
+                          .gdlr-core-column-service-content-wrapper
+                            .gdlr-core-column-service-title-wrap(style='margin-bottom: 5px;')
+                              h3.gdlr-core-column-service-title(style='font-size: 16px;text-transform: none;color: black') Super Fast Booking
+          .gdlr-core-pbf-wrapper(style='padding: 90px 0px 65px 0px;')
+            .gdlr-core-pbf-background-wrap
+              .gdlr-core-pbf-background.gdlr-core-parallax.gdlr-core-js(style='background-image: url(https://cdn.goodlayers.com/traveltour/wp-content/uploads/2017/01/tour-bg-3.jpg);background-size: cover;background-position: center;', data-parallax-speed='0.05')
+            .gdlr-core-pbf-wrapper-content.gdlr-core-js
+              .gdlr-core-pbf-wrapper-container.clearfix.gdlr-core-container
+                .gdlr-core-pbf-element
+                  .gdlr-core-title-item.gdlr-core-item-pdb.clearfix.gdlr-core-center-align.gdlr-core-title-item-caption-top.gdlr-core-item-pdlr(style='padding-bottom: 15px;')
+                    .gdlr-core-title-item-title-wrap
+                      h3.gdlr-core-title-item-title.gdlr-core-skin-title(style='font-size: 29px;font-weight: 700;letter-spacing: 0px;text-transform: none;')
+                        span.gdlr-core-title-item-left-icon(style='font-size: 27px;')
+                          i.material-icons place
+
+                        | Popular Tour Packages
+                        span.gdlr-core-title-item-title-divider.gdlr-core-skin-divider
+                .gdlr-core-pbf-element
+                  .gdlr-core-text-box-item.gdlr-core-item-pdlr.gdlr-core-item-pdb.gdlr-core-center-align(style='padding-bottom: 35px;')
+                    .gdlr-core-text-box-item-content
+                      p
+                        a(href='/plan') View All Tours
+                .gdlr-core-pbf-element
+                  .row(id="tours")
+                    each plan,index in products
+                      if index < 3
+                        .col-sm-4
+                          .gdlr-core-item-mglr
+                            .tourmaster-tour-grid.tourmaster-tour-frame.tourmaster-price-right-title
+                              .tourmaster-tour-thumbnail.tourmaster-media-image
+                                a(href='/plan/#{plan.slug}')
+                                  .img-cont
+                                    img(src='#{plan.thumb_url}', alt='')
+                                .tourmaster-thumbnail-ribbon.gdlr-core-outer-frame-element(style='color: #ffffff;background-color: #4692e7;')
+                                  .tourmaster-thumbnail-ribbon-cornor(style='border-right-color: rgba(70, 146, 231, 0.5);')
+                                  |                                                    #{Math.ceil((plan.base_price-plan.offer_price)*100/plan.base_price)}% Off
+                              .tourmaster-tour-content-wrap.gdlr-core-skin-e-background
+                                h3.tourmaster-tour-title.gdlr-core-skin-title
+                                  a(href='/plan/#{plan.slug}') #{plan.name}
+                                .tourmaster-tour-price-wrap.tourmaster-discount
+                                  span.tourmaster-tour-price
+                                    span.tourmaster-head From
+                                    span.tourmaster-tail ₹#{plan.base_price}
+                                  span.tourmaster-tour-discount-price ₹#{plan.offer_price}
+                                .tourmaster-tour-info-wrap.clearfix
+                                  .tourmaster-tour-info.tourmaster-tour-info-duration-text
+                                    i.material-icons timer
+                                    span #{plan.duration}
+          .gdlr-core-pbf-wrapper(style='padding: 120px 0px 70px 0px;')
+            .gdlr-core-pbf-background-wrap
+              .gdlr-core-pbf-background.gdlr-core-parallax.gdlr-core-js(style='background-image: url(https://cdn.goodlayers.com/traveltour/wp-content/uploads/2017/01/stunning-bg-2.jpg);background-size: cover;background-position: center;', data-parallax-speed='0.2')
+            .gdlr-core-pbf-wrapper-content.gdlr-core-js
+              .gdlr-core-pbf-wrapper-container.clearfix.gdlr-core-container
+                .gdlr-core-pbf-column.gdlr-core-column-30.gdlr-core-column-first(data-skin='White Text')
+                  .gdlr-core-pbf-column-content-margin.gdlr-core-js
+                    .gdlr-core-pbf-column-content.clearfix.gdlr-core-js
+                      .gdlr-core-pbf-element
+                        .gdlr-core-title-item.gdlr-core-item-pdb.clearfix.gdlr-core-left-align.gdlr-core-title-item-caption-top.gdlr-core-item-pdlr(style='padding-bottom: 15px;')
+                          .gdlr-core-title-item-title-wrap
+                            h3.gdlr-core-title-item-title.gdlr-core-skin-title(style='font-size: 48px;font-weight: 700;letter-spacing: 0px;text-transform: none;color: #ffffff;')
+                              | Discount  
+                              span(style='color: #ffb43e;')   10-30% Off
+                              span.gdlr-core-title-item-title-divider.gdlr-core-skin-divider
+                      .gdlr-core-pbf-element
+                        .gdlr-core-text-box-item.gdlr-core-item-pdlr.gdlr-core-item-pdb.gdlr-core-left-align(style='padding-bottom: 15px;')
+                      .gdlr-core-pbf-element
+                        .gdlr-core-button-item.gdlr-core-item-pdlr.gdlr-core-item-pdb.gdlr-core-left-align
+                          a#gdlr-core-button-id-93051.gdlr-core-button.gdlr-core-button-solid.gdlr-core-button-no-border(href='/plan')
+                            span.gdlr-core-content See Promotion Tours
+                .gdlr-core-pbf-column.gdlr-core-column-30
+                  .gdlr-core-pbf-column-content-margin.gdlr-core-js
+                    .gdlr-core-pbf-column-content.clearfix.gdlr-core-js
+          .gdlr-core-pbf-wrapper(style='padding: 0px 0px 0px 0px;')
+            .gdlr-core-pbf-wrapper-content.gdlr-core-js
+              .gdlr-core-pbf-wrapper-container.clearfix.gdlr-core-container
+                .gdlr-core-pbf-column.gdlr-core-column-36.gdlr-core-column-first
+                  .gdlr-core-pbf-column-content-margin.gdlr-core-js(style='padding: 70px 0px 10px 0px;')
+                    .gdlr-core-pbf-column-content.clearfix.gdlr-core-js
+                      .gdlr-core-pbf-element
+                        .gdlr-core-title-item.gdlr-core-item-pdb.clearfix.gdlr-core-left-align.gdlr-core-title-item-caption-top
+                      .gdlr-core-pbf-element
+                        .gdlr-core-title-item.gdlr-core-item-pdb.clearfix.gdlr-core-left-align.gdlr-core-title-item-caption-top.gdlr-core-item-pdlr(style='padding-bottom: 10px;')
+                          .gdlr-core-title-item-title-wrap
+                              span.gdlr-core-title-item-title-divider.gdlr-core-skin-divider
+                      .gdlr-core-pbf-element
+                        .gdlr-core-text-box-item.gdlr-core-item-pdlr.gdlr-core-item-pdb.gdlr-core-left-align
+                          .gdlr-core-text-box-item-content
+                            div
+                              | !{licensee.footer}
+                .gdlr-core-pbf-column.gdlr-core-column-24(data-skin='Newsletter form')
+                  .gdlr-core-pbf-column-content-margin.gdlr-core-js(style='padding: 70px 0px 0px 0px;')
+                    .gdlr-core-pbf-column-content.clearfix.gdlr-core-js
+                      .gdlr-core-pbf-element
+                        .gdlr-core-blog-item.gdlr-core-item-pdb.clearfix.gdlr-core-style-blog-widget(style='padding-bottom: 35px;')
+                      .gdlr-core-pbf-element
+                        .gdlr-core-title-item.gdlr-core-item-pdb.clearfix.gdlr-core-left-align.gdlr-core-title-item-caption-top.gdlr-core-item-pdlr(style='padding-bottom: 27px;')
+                          .gdlr-core-title-item-title-wrap
+                            h3.gdlr-core-title-item-title.gdlr-core-skin-title(style='font-size: 20px;font-weight: 700;letter-spacing: 0px;text-transform: none;')
+                              span.gdlr-core-title-item-left-icon(style='font-size: 19px;')
+                                i.fa.fa-envelope-o(style='color: #467fe7;')
+                              | Newsletter
+                              span.gdlr-core-title-item-title-divider.gdlr-core-skin-divider
+                      .gdlr-core-pbf-element
+                        .gdlr-core-newsletter-item.gdlr-core-item-pdlr.gdlr-core-item-pdb.gdlr-core-style-round(style='padding-bottom: 25px;')
+                          .newsletter.newsletter-subscription
+                            form.js-validate-form.row.booking-form
+                              input(type="hidden" name="slug" value="#{licensee.name + req.originalUrl}" )
+                              input(type="hidden" name="travellers" value="1")
+                              input(type="hidden" name="licensee" value="#{licensee.id}")
+                              .gdlr-core-newsletter-email
+                                  input.newsletter-email.gdlr-core-skin-e-background.gdlr-core-skin-e-content(placeholder='Your Email Address', type='email',  name='email', size='30', data-validate="email" data-fieldType="email")
+                              .gdlr-core-newsletter-submit 
+                                  input.js-getQuote.js-validate-submit(type='submit', value='Subscribe')
+
+
+          .gdlr-core-pbf-wrapper(style='padding: 0px 0px 0px 0px;', data-skin='Blue Column Service')
+            .gdlr-core-pbf-background-wrap
+              .gdlr-core-pbf-background.gdlr-core-parallax.gdlr-core-js(style='background-image: url(https://cdn.goodlayers.com/traveltour/wp-content/uploads/2016/06/column-bg.jpg);background-repeat: repeat;background-position: center;', data-parallax-speed='0')
+            .gdlr-core-pbf-wrapper-content.gdlr-core-js
+              .gdlr-core-pbf-wrapper-container.clearfix.gdlr-core-container
+                .gdlr-core-pbf-column.gdlr-core-column-15.gdlr-core-column-first(data-skin='Blue Icon')
+                  .gdlr-core-pbf-column-content-margin.gdlr-core-js.gdlr-core-column-extend-left(style='margin: 0px 17px 0px 0px;padding: 57px 0px 57px 0px;', data-sync-height='column-service-height')
+                    .gdlr-core-pbf-background-wrap(style='background-color: #4263c1; height: 114% ')
+                    .gdlr-core-pbf-column-content.clearfix.gdlr-core-js.gdlr-core-sync-height-content
+                      .gdlr-core-pbf-element
+                        .gdlr-core-title-item.gdlr-core-item-pdb.clearfix.gdlr-core-left-align.gdlr-core-title-item-caption-top.gdlr-core-item-pdlr(style='padding-bottom: 0px;')
+                          .gdlr-core-title-item-title-wrap
+                            h3.gdlr-core-title-item-title.gdlr-core-skin-title(style='font-size: 19px;font-weight: 400;letter-spacing: 0px;text-transform: none;color: white')
+                              | Why Book With Us?
+                              span.gdlr-core-title-item-title-divider.gdlr-core-skin-divider
+                .gdlr-core-pbf-column.gdlr-core-column-15(data-skin='Blue Icon')
+                  .gdlr-core-pbf-column-content-margin.gdlr-core-js(style='padding: 40px 0px 0px 0px;', data-sync-height='column-service-height')
+                    .gdlr-core-pbf-column-content.clearfix.gdlr-core-js.gdlr-core-sync-height-content
+                      .gdlr-core-pbf-element
+                        .gdlr-core-column-service-item.gdlr-core-item-pdb.gdlr-core-left-align.gdlr-core-column-service-icon-left.gdlr-core-no-caption.gdlr-core-item-pdlr(style='padding-bottom: 20px;')
+                          .gdlr-core-column-service-media.gdlr-core-media-image
+                            img(src='https://cdn.goodlayers.com/traveltour/wp-content/uploads/2016/06/icon-10.png', alt='', width='37', height='39')
+                          .gdlr-core-column-service-content-wrapper
+                            .gdlr-core-column-service-title-wrap(style='margin-bottom: 5px;')
+                              h3.gdlr-core-column-service-title Happy Customers
+                            .gdlr-core-column-service-content(style='font-size: 14px;')
+                              p(style = "color:white") Read our Reviews
+                .gdlr-core-pbf-column.gdlr-core-column-15(data-skin='Blue Icon')
+                  .gdlr-core-pbf-column-content-margin.gdlr-core-js(style='padding: 40px 0px 0px 0px;', data-sync-height='column-service-height')
+                    .gdlr-core-pbf-column-content.clearfix.gdlr-core-js.gdlr-core-sync-height-content
+                      .gdlr-core-pbf-element
+                        .gdlr-core-column-service-item.gdlr-core-item-pdb.gdlr-core-left-align.gdlr-core-column-service-icon-left.gdlr-core-no-caption.gdlr-core-item-pdlr(style='padding-bottom: 10px;')
+                          .gdlr-core-column-service-media.gdlr-core-media-image
+                            img(src='https://cdn.goodlayers.com/traveltour/wp-content/uploads/2016/06/icon-11.png', alt='', width='34', height='43')
+                          .gdlr-core-column-service-content-wrapper
+                            .gdlr-core-column-service-title-wrap(style='margin-bottom: 5px;')
+                              h3.gdlr-core-column-service-title Assured Services
+                            .gdlr-core-column-service-content(style='font-size: 14px;')
+                              p(style = "color:white") Enjoy our best services
+                .gdlr-core-pbf-column.gdlr-core-column-15(data-skin='Blue Icon')
+                  .gdlr-core-pbf-column-content-margin.gdlr-core-js(style='padding: 40px 0px 0px 0px;', data-sync-height='column-service-height')
+                    .gdlr-core-pbf-column-content.clearfix.gdlr-core-js.gdlr-core-sync-height-content
+                      .gdlr-core-pbf-element
+                        .gdlr-core-column-service-item.gdlr-core-item-pdb.gdlr-core-left-align.gdlr-core-column-service-icon-left.gdlr-core-no-caption.gdlr-core-item-pdlr(style='padding-bottom: 10px;')
+                          .gdlr-core-column-service-media.gdlr-core-media-image
+                            img(src='https://cdn.goodlayers.com/traveltour/wp-content/uploads/2016/06/icon-12.png', alt='', width='27', height='37')
+                          .gdlr-core-column-service-content-wrapper
+                            .gdlr-core-column-service-title-wrap(style='margin-bottom: 5px;')
+                              h3.gdlr-core-column-service-title Secure Payment
+                            .gdlr-core-column-service-content(style='font-size: 14px;')
+                              p(style = "color:white") 100% Secure Payment
+
+  a#traveltour-footer-back-to-top-button.traveltour-footer-back-to-top-button(href='#traveltour-top-anchor')
+    i.fa.fa-angle-up
+  
+
+block js
+  script.
+    (function() {
+      var el = {
+        formBtn: '.js-getQuote',
+        $glider: $(".js-glide")
+      }
+
+      TDG.lazyLoadImages($('.home-content'));
+      el.$glider.glide({
+        type: 'slideshow',
+        autoplay: 2000,
+        hoverpause: false,
+        animationTimingFunc: "ease-out",
+        animationDuration: 1000
+      });
+      var querySubmit = function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        var $btn_ref = $(this), email_ref, user = {};
+
+        el.$form = $btn_ref.parents('form');
+
+        email_ref = $(el.$form.find('[name=email]'));
+
+        user.slug = $(el.$form.find('[name=slug]')).val();
+        user.name = $(el.$form.find('[name=username]')).val();
+        user.start_date = $(el.$form.find('[name=start_date]')).val();
+        user.comment = $(el.$form.find('[name=comment]')).val();
+        user.is_booking = false;
+
+        user.licensee = $(el.$form.find('[name=licensee]')).val();
+
+        if (email_ref && email_ref.val()) {
+          user.email = email_ref.val();
+        }
+        if (!$btn_ref.hasClass('disabled')) {
+          $btn_ref.addClass('disabled');
+
+          $.ajax({
+            url: TDG.urls.PRODUCT_BOOKING,
+            method: 'POST',
+            data: user,
+            success: function (response) {
+              $('<div> We will contact you shortly </div>').insertAfter(el.$form);
+              $btn_ref.removeClass('disabled')
+            },
+            error: function (err) {
+              $('<div> Something is wrong </div>').insertAfter(el.$form);
+              $btn_ref.removeClass('disabled')
+            }
+          });
+        }
+      }; // Query Submit handler ends
+
+      $(el.formBtn).click(querySubmit);
+    })();
+
+
+
+
+
+
+

@@ -1,0 +1,16 @@
+extends ../layouts/default
+
+block css
+  style.
+    .container-600{
+      width : 600px;
+
+    }
+
+block mainContent
+  - blog = result.blog
+    .container.container-600.card
+      h1=blog.title
+      div!=blog.content
+
+            

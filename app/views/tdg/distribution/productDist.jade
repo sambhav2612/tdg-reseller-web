@@ -1,0 +1,67 @@
+extends ./default
+
+block css
+  style
+    include ../../public/resources/css/pdf.css
+block mainContent
+  - product = result.plan
+  - var watermarkImg = watermark ? "linear-gradient(to bottom, rgba(255,255,255,0.9) 0%,rgba(255,255,255,0.9) 100%),url('" + static + "/resources/images/logo/traveldglobe-red.png')" : "transparent";
+  .pdf-body.product-pdf(style="background-image:#{watermarkImg};")
+    center.company-logo
+      a(href="http://www.traveldglobe.com"): img(src="#{static}/resources/images/logo/traveldglobe-red.png" alt="travel d\'globe")
+      .tag-line New way to Plan Your Trip
+    .product-image
+      center: img(src="#{product.image_url}" alt="#{product.name}")
+    .trip-tags
+      h1 #{product.name}
+      .col-sm-12(style="padding:5px 15px;")
+        .trip-tags
+          .tag
+            .bulb
+              mixin paintIcon('duration', {size: {x:15,y:15}, fill:'#fff'})
+            .name
+              strong Trip Duration: #{product.duration}
+          .vendor-factor.show.js-vendorFactor
+            .tag
+              .bulb
+                mixin paintIcon('group', {size: {x:15,y:15},fill:'#fff'})
+              .name
+                strong Min. Group size to book: #{product.travellers} travellers
+            .tag
+              .bulb
+                mixin paintIcon('meals', {size: {x:15,y:15},fill:'#fff'})
+              .name
+                strong No. of meals: #{product.meals}(See Inclusions)
+            .tag
+              .bulb
+                mixin paintIcon('accommodation', {size: {x:15,y:15},fill:'#fff'})
+              .name
+                strong Accommodation available: #{product.accommodation}
+    section
+        .vendor-factor.show.js-vendorFactor
+          h3 Things included in your Package
+          div.inclusions
+            -each inclusion in product.inclusions
+              .brick
+                div
+                  mixin paintIcon(inclusion.icon, {size: {x:30,y:30}})
+                div #{inclusion.name}
+          if product.inclusion_text
+            div #{product.inclusion_text}
+    if product.itinerary
+      section
+        .itinerary-content
+          h3 Itinerary / Tour Plan
+          .content !{product.itinerary}
+    section
+      .vendor-factor.show
+        h3 Things not included
+        div.exclusions
+          -each exclusion in product.exclusions
+            .brick #{exclusion.name}
+    if product.packs.length
+      section
+        h2 What you need to pack for this tour?
+        div
+          -each pack in product.packs
+            .brick #{pack.name}

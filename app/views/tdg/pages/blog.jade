@@ -1,0 +1,13 @@
+extends ../layouts/default
+
+block css
+
+block mainContent
+  - blog = result.blog
+    .container.container-600.card
+      .cover-image
+        img(src="#{blog.image_url}" alt="#{blog.title}")
+      h1=blog.title
+      div!=blog.content
+
+            

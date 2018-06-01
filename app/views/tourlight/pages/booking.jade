@@ -1,0 +1,58 @@
+//
+   Created by Himanshu wolf on 29/03/17.
+
+extends ../layouts/default
+block css
+   style
+      include ../../public/resources/css/checkout.css
+block mainContent
+   - product = result.product
+   - isFailure = req.query.failure
+   - travel_date = req.query.travel_date || ''
+   - travellers = req.query.travellers || 1
+   if isFailure
+      .col-sm-12.text-center
+         h4(style="color:#ee3300") Something went wrong. Please try again.
+   if product
+      include ../../includes/hasBooking.jade
+   else
+      .text-center
+         h1 No Travel Plans Yet?
+         div
+            a.btn.btn-primary.lg(href="/" title="Add Popular treks") Add Popular treks
+block js
+   script.
+      (function () {
+         var el = {
+            $quantityIcon: $('.js-qIcon'),
+            $quantity: $('.js-quantity'),
+            $quantityField: $('[name="travellers"]'),
+            $total: $('.js-total'),
+            $advance: $('.js-advance')
+         }, price = parseInt($('.js-price').text()), advance = parseInt(el.$advance.data('advance'));
+
+         $('.js-travelDate').datepicker({
+            container: '.datepicker',
+            orientation: 'bottom',
+            toggleActive: true,
+            autoclose: true,
+            startDate: '+2d'
+         });
+         el.$quantityIcon.click(function () {
+            var $this = $(this), quantity = parseInt(el.$quantityField.val());
+            if ($this.attr('data-type') === 'plus') {
+               quantity += 1;
+               el.$quantity.text(quantity);
+               el.$quantityField.val(quantity);
+            } else {
+               if (quantity === 1) {
+                  return false;
+               }
+               quantity -= 1;
+               el.$quantity.text(quantity);
+               el.$quantityField.val(quantity);
+            }
+            el.$total.text(price * quantity);
+            el.$advance.text(advance * quantity);
+         })
+      })();

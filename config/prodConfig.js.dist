@@ -1,0 +1,63 @@
+var path = require('path'),
+    projectPath = path.normalize(__dirname + '/..');
+
+module.exports={
+  root : require('path').normalize(__dirname + '/..'),
+  app: {
+    name: 'tdg-web'
+  },
+  api : {
+    url : "http://192.168.1.110:8000/api/v1",
+    kosh_url : "http://192.168.1.110:8080/api/v1",
+    tdg_api : "http://192.168.1.1:8080/api/v1"
+  },
+  web :{
+    url : '',
+    css : 'http://',
+    js : 'http://'
+  },
+  oAuth : {
+   facebook : {
+        clientID : '1151322284897579',
+        clientSecret : 'a357dcb903c124ca29de1a8f0d21d6e6',
+        callbackURL : 'http://www.traveldglobe.com/auth/facebook/cb'
+      },
+      google : {
+            clientID : '1006994807059-7p2i16getfcbiq654ov15mqqnv443v71.apps.googleusercontent.com',
+            clientSecret : 'wKRG-HlIRgjGqFfFKlR524T-',
+            callbackURL : 'http://www.traveldglobe.com/auth/google/cb'
+          }
+  },
+  analytics : true,
+  logs : {
+    mongo: '52.35.9.196',
+    dir : path.resolve(projectPath, './logs'),
+    accessLogFile: path.resolve(projectPath, './logs/access.log'),
+    applicationLogFile: path.resolve(projectPath, './logs/tdg-web.log'),
+    databaseLogFile: path.resolve(projectPath, './logs/tdg-web.log'),
+    level: "info",
+    maxsize: 20971520
+  },
+  foreign_api : {
+    WEATHER : 'e2ce45c53c815cf155de33edabbb377a',
+    GOKARDE : {
+      appID : '1531da25',
+      appKEY : 'd916a9083154026c72667d359c49443c'
+    }
+  },
+  tourboks_api : {
+    URL : 'https://api.tourboks.com/v1.04',
+    USERNAME : 'Traveldglobe',
+    PASSWORD : 'Tr@v3lGlob3'
+  },
+
+  rzp : {
+    KEY : 'rzp_test_',
+    SECRET : 'test'
+  },
+
+  port:3000,
+  host: 'http://www.traveldglobe.com',
+  static : 'https://tdgstatic.s3.amazonaws.com/app',
+  env : 'prod'
+}

@@ -1,0 +1,22 @@
+.filter-group .budget-slot {
+    padding: 7px;
+    background: #faf9f9;
+    border-radius: 2px;
+    border: 1px solid #dddbdb;
+    text-align: center;
+    min-width: 80px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all .5s;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 7px;
+}
+
+.filter-group{
+    display: inline-block;
+}
+
+input[type=radio], input[type=checkbox] {
+    display: none;
+}

@@ -1,0 +1,59 @@
+-licensee = result.licensee
+- pages = result.pages
+- tags = result.tags
+.traveltour-header-background-transparent
+  .traveltour-top-bar.hidden-xs
+    .traveltour-top-bar-background
+    .traveltour-top-bar-container.clearfix.traveltour-container
+      .traveltour-top-bar-left.traveltour-item-pdlr
+        i.fa.fa-phone(style='font-size: 16px;color: #ffffff;margin-right: 5px;')
+          span.span(style="margin-left:5px")  +91-#{licensee.mobile}
+        i.fa.fa-envelope-o(style='font-size: 16px;color: #ffffff;margin-left: 30px;margin-right: 10px;')
+          span.span(style="margin-left:5px") #{licensee.email}
+      .traveltour-top-bar-right.traveltour-item-pdlr
+        .traveltour-top-bar-right-social
+          a.traveltour-top-bar-social-icon(href="https://www.facebook.com/#{licensee.facebook}", target='_blank', title='facebook')
+            i.fab.fa-facebook
+          a.traveltour-top-bar-social-icon(href="https://www.instagram.com/#{licensee.instagram}", target='_blank', title='instagram')
+            i.fa.fa-instagram
+          a.traveltour-top-bar-social-icon(href="https://www.pinterest.com/#{licensee.pinterest}", target='_blank', title='pin-interest')
+            i.fab.fa-pinterest
+          a.traveltour-top-bar-social-icon(href='https://www.twitter.com/#{licensee.twitter}', target='_blank', title='twitter')
+            i.fab.fa-twitter
+  header.traveltour-header-wrap.traveltour-header-style-plain.traveltour-style-menu-right.traveltour-sticky-navigation.traveltour-style-slide
+    .traveltour-header-background
+    .traveltour-header-container.traveltour-container
+      .traveltour-header-container-inner.clearfix
+        include ../../includes/mobileNav
+
+        .traveltour-logo.traveltour-item-pdlr
+          .traveltour-logo-inner
+            a(href='/')
+              img(style="width:100%;max-width:85px;border-radius:100%" src="#{licensee.image_url}")
+        .traveltour-navigation.traveltour-item-pdlr.clearfix
+          #traveltour-main-menu.traveltour-main-menu.sf-js-enabled.sf-arrows
+            ul#menu-main-navigation-1.sf-menu
+              li.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-home.menu-item-has-children.menu-item-4373.traveltour-normal-menu
+                a.sf-with-ul-pre.sf-with-ul(href='/') Home
+              //li.menu-item.menu-item-type-custom.menu-item-object-custom.menu-item-has-children.menu-item-4341.traveltour-normal-menu
+              //  a.sf-with-ul-pre.sf-with-ul(href='/plan') Tours
+              li
+                if tags
+                  a(href='/plan') Tours ▾
+                  ul.dropdown
+                    each tours, tag in tags
+                      li
+                        a( href='#') &#9666; #{tag}
+                        ul.dropdown-submenu
+                          each tour in tours
+                            li
+                              a(href='/plan/#{tour.slug}') #{tour.name}
+                else
+                  a(href='/plan') Tours
+              li.menu-item.menu-item-type-custom.menu-item-object-custom.menu-item-has-children.menu-item-4341.traveltour-normal-menu
+                a.sf-with-ul-pre.sf-with-ul(href='/event') Events
+              li.menu-item.menu-item-type-post_type.menu-item-object-page.menu-item-home.menu-item-has-children.menu-item-4373.traveltour-normal-menu
+                a.sf-with-ul-pre.sf-with-ul(href='/blog') Blog
+              li.menu-item.menu-item-type-custom.menu-item-object-custom.menu-item-has-children.menu-item-4341.traveltour-normal-menu
+                a.sf-with-ul-pre.sf-with-ul(href='/#contact') Contact Us
+

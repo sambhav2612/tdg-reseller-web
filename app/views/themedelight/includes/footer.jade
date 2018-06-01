@@ -1,0 +1,68 @@
+footer.footer.row
+  .container
+    .row.margin-top.margin-bottom.footer__widgets-areas
+      .col-sm-4.footer__widgets-area.footer__widgets-area--2
+        h3.traveltour-widget-title
+          span.traveltour-widget-head-text #{licensee.name}
+            .gdlr-core-space-shortcode(style='margin-bottom: 10px;') #{licensee.desc.split('.')[0]}
+              h3.traveltour-widget-title
+                span.traveltour-widget-head-text Important Links
+            ul.unlist
+              li.cat-item#cat
+                a(href="/blog" title="Blog") Blog Posts
+                  li.cat-item#cat
+                    a(href="/pay" title="Easy Online Pay") Easy Online Pay
+                for page in pages
+                  li.cat-item#cata
+                    a(href="/page/#{page.slug}") #{page.title}
+      .col-sm-4.footer__widgets-area.footer__widgets-area--3
+        #twitter_tweets_adventure_tours-2.widget.block-after-indent.widget_twitter_tweets_adventure_tours
+          span.traveltour-widget-head-text Did You Like Us?
+          span.clear
+            .tourmaster-widget-tour-category
+              .tourmaster-tour-category-widget-holder.clearfix
+                #widget-area-3.widget-area(style="overflow:hidden")
+                  aside#facebook-likebox-3.widget.widget_facebook_likebox
+                    #fb-root
+                    .fb-page(data-href='https://www.facebook.com/#{licensee.facebook}/', data-width='340', data-height='432', data-hide-cover='false', data-show-facepile='true', data-show-posts='false')
+                      .fb-xfbml-parse-ignore
+                        blockquote(cite='https://www.facebook.com/#{licensee.facebook}/')
+                          a(href='https://www.facebook.com/#{licensee.facebook}/') Did you liked us?
+      .col-sm-4.footer__widgets-area.footer__widgets-area--4
+        #contact_us_adventure_tours-2.widget.block-after-indent.widget_contact_us_adventure_tours
+          .widget-contact-info
+            h3.widget__title Contact Us
+            .widget-contact-info__item
+              .widget-contact-info__item__icon
+                i.fa.fa-map-marker
+              .widget-contact-info__item__text
+                span !{licensee.address}
+            .widget-contact-info__item
+              .widget-contact-info__item__icon
+                i.fa.fa-phone
+              .widget-contact-info__item__text
+                a(href="tel:+91-#{licensee.mobile}") #{licensee.mobile}
+            .widget-contact-info__item
+              .widget-contact-info__item__icon
+                i.fa.fa-envelope.widget-contact-info__item__icon__email
+              .widget-contact-info__item__text
+                a(href="mailto:#{licensee.email}") #{licensee.email}
+  .footer__bottom
+    .footer__arrow-top
+      a(href='#')
+        i.fa.fa-chevron-up
+    .container
+      .row
+        .col-md-6
+          .footer__copyright
+            All Right Reserved &copy; #{licensee.name}
+          .caption Powered by traveldglobe.com
+        .col-md-6
+          .footer-nav
+            ul#menu-footer-menu.menu
+              li#menu-item-141.menu-item.menu-item-type-custom.menu-item-object-custom.menu-item-141
+                a(href='#') Terms & Conditions
+              li#menu-item-142.menu-item.menu-item-type-custom.menu-item-object-custom.menu-item-142
+                a(href='#') Cookies
+              li#menu-item-143.menu-item.menu-item-type-custom.menu-item-object-custom.menu-item-143
+                a(href='#') Privacy Policy

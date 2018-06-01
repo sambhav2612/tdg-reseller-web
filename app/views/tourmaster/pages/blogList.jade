@@ -1,0 +1,27 @@
+extends ../layouts/default
+append appendVars
+   - seo_title = `Recent Blog Posts from ${result.licensee.name}.`
+   - seo_desc = `Read our blog Posts written by amazing people who love to travel and explore new places | ${result.licensee.name}.`
+
+block css
+
+block mainContent
+  - blogs = result.blogs
+  .traveltour-page-title-wrap.traveltour-style-custom.traveltour-left-align.row
+    .traveltour-header-transparent-substitute(style='height: 147px;')
+    .traveltour-page-title-overlay
+    .traveltour-page-title-container.traveltour-container
+      .traveltour-page-title-content.traveltour-item-pdlr
+        h1.traveltour-page-title Recent Blog Post
+        .traveltour-page-caption
+          | Read Stories
+  .row
+    for blog in blogs
+      .col-sm-6
+        a.card.blog-tile(href="/blog/#{blog.slug}" style="overflow:hidden")
+          .img-cont
+            img(src="#{blog.thumb_url}" alt="#{blog.title}")
+          .content
+            h4.ellipsis #{blog.title}
+
+       

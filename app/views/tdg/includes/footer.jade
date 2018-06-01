@@ -1,0 +1,39 @@
+-licensee = result.licensee
+- pages = result.pages
+
+footer.footer.row
+	.content-wrapper
+		.col-sm-12.text-center
+			a(href="/"  title="Home")
+				if licensee.thumb_url
+					img(style="width:100%;max-width:100px;" src="#{licensee.thumb_url}" alt ="#{licensee.name}")
+				else
+					img(style="width:100%;max-width:100px;" src="https://graph.facebook.com/#{licensee.facebook}/picture?type=large")
+		.col-sm-7
+			h4 About #{licensee.name}
+			p #{licensee.desc}
+			.v-space
+				div
+					a.social-link.light(href='https://www.facebook.com/#{licensee.facebook}' title="Find travel d'globe on Facebook" target='_blank')
+						mixin paintIcon('facebook',{size:{x:24,y:24}})
+					a.social-link.light(href='https://www.facebook.com/#{licensee.facebook}' title="Find travel d'globe on Facebook" target='_blank')
+						mixin paintIcon('instagram',{size:{x:24,y:24}})
+					a.social-link.light(href='https://www.facebook.com/#{licensee.facebook}' title="Find travel d'globe on Facebook" target='_blank')
+						mixin paintIcon('twitter',{size:{x:24,y:24}})
+				div All rights reserved &copy; #{licensee.name}
+				small.v-space By continuing pass this page you accept the terms.
+		.col-sm-5.text-right
+			h3 More Links
+			div
+				a.v-link(href="/blog" title="Blog") Blog Posts
+			for page in pages
+				div
+					a.v-link(href="/page/#{page.slug}") #{page.title}
+					
+
+			
+		.col-sm-12.text-center
+			.caption Powered by traveldglobe.com
+
+
+

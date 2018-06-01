@@ -1,0 +1,38 @@
+mixin getPagination(page, pageCount, resultCount, total, page_size)
+   - page = parseInt(page)
+   .pagination
+      if pageCount>1
+         ul.list-unstyled
+            if pageCount>5
+               if page>2
+                  li(class="page", data-page=page-1)
+                     a(href='?page=#{page-1}') &#9664;
+                  li(class="page", data-page=1)
+                     a(href='?page=1')=1
+                  li(class="page gap") ...
+                  li(class="page active", data-page=page)
+                     a(href="?page=#{page}")=page
+                  if page<pageCount
+                     li(class="page gap") ...
+                     li(class="page", data-page=pageCount)
+                        a(href='?page=#{pageCount}')=pageCount
+                     li(class="page", data-page=page+1)
+                        a(href='?page=#{page+1}') &#9654;
+               else
+                  li(class="page #{page ==1 ? 'active': ''}", data-page=1)
+                     a(href='?page=1')=1
+                  li(class="page #{page ==2 ? 'active': ''}", data-page=2)
+                     a(href='?page=2')=2
+                  li(class="page gap") ...
+                  li(class="page", data-page=pageCount)
+                     a(href='?page=#{pageCount}')=pageCount
+                  li(class="page", data-page=page+1)
+                     a(href='?page=#{page+1}') &#9654;
+            else
+               - for (var i = 1; i <= pageCount; ++i)
+                  li(class="page #{page ==i ? 'active': ''}", data-page=i)
+                     a(href='?page=#{i}')=i
+
+         .count Showing #{resultCount} of #{total} results
+
+

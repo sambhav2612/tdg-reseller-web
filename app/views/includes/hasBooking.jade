@@ -1,0 +1,79 @@
+.row
+   .col-sm-4
+      h3 Book your travel plan
+      .img-cont
+         img.img-responsive.center-block( src="#{product.thumb_url}" alt="#{product.name}")
+      .wrap-payment(style="color: rgb(56, 36, 6) ")  
+         div
+            h4 #{product.name}
+            div
+            .row(style="padding:10px 0;")
+               .col-xs-8
+                  div No. of Travellers:
+                     //.qty-icon.js-qIcon(data-type="minus") -
+                     .qty.js-quantity #{travellers}
+                     //.qty-icon.js-qIcon(data-type="plus") +
+               .col-xs-4
+                  span Price: ₹&nbsp;
+                  span.js-price #{product.offer_price}
+         div(style="font-size:1.2em;margin: 20px 0;")
+            if result.licensee.gst_number
+               .subTotal Sub Total: ₹&nbsp; #{(travellers*product.offer_price)}
+               .tax GST(5%): ₹&nbsp; #{Math.round(travellers*product.offer_price*0.05)}
+               hr
+               | Total: ₹&nbsp;
+               span.js-total  #{Math.round((travellers*product.offer_price)+(travellers* product.offer_price*0.05))}
+               div
+                  span Advance to Pay: ₹&nbsp;
+                  span.js-advance(data-advance="#{product.advance}") #{product.advance  == 0 || !product.advance || product.offer_price ==  product.advance ?   ((travellers*product.offer_price)+(travellers* product.offer_price*0.05)) : travellers*product.advance }
+                  .gst GSTIN: #{result.licensee.gst_number}
+            else
+               span.js-total Total: ₹&nbsp;#{travellers*product.offer_price }
+               div(style="font-size:1.2em;margin: 20px 0;")
+                  span Advance to Pay: ₹&nbsp;
+                  span.js-advance(data-advance="#{product.advance}") #{product.advance  == 0 || !product.advance || product.offer_price ==  product.advance ?   ((travellers*product.offer_price)) : travellers*product.advance }
+   .col-sm-8
+      .booking-form
+         h3.hidden-xs Place your booking without hassle
+         h4.visible-xs Place your booking without hassle
+
+         form.js-validate-form#createBookingForm.row
+            input(type="hidden" name="licensee_id" value="#{result.licensee.id}")
+            input(type="hidden" name="licensee_product" value="#{product.id}")
+            input(type="hidden" name="travellers" data-validate="number" data-fieldType="number" value="#{travellers}")
+            input(type="hidden" name="offer_price" value="#{product.offer_price}")
+            input(type="hidden" name="advance" value="#{product.advance? product.advance: product.offer_price}")
+            input(type="hidden" name="is_booking" value="true")
+            input(type="hidden" name="gst_number" value="#{result.licensee.gst_number}")
+            
+            .row(style="display: block;")
+               .col-sm-6
+
+                  label Email
+                     span.mandatory *
+                     input.form-control#userEmail(type="text" placeholder="Your email address" name="email" data-validate="empty, email" data-fieldtype="email")
+               .col-sm-6
+                  label Name
+                     span.mandatory *
+                     input.form-control#userName(type="text" placeholder="Your name goes here" name="firstname")
+            .row
+               .col-sm-6
+                  label Mobile
+                     span.mandatory *
+                     input.form-control#userPhone(type="text" placeholder="10 digits Mobile No." name="phone" data-validate="phone" data-fieldType="phone")
+               .col-sm-6
+                  label.datepicker Travel Date
+                     if product.start_date
+                        input.form-control(disabled type="text" name="start_date" data-date-format="dd-mm-yyyy" value="#{start_date.format('DD-MM-YYYY')}")
+                     else
+                        input.form-control.js-travelDate(type="text" name="start_date" data-date-format="dd-mm-yyyy" value="#{travel_date}")
+            .row(style="width:200px;margin:20px auto auto")
+                  a.js-validate-submit#createBooking(type="hidden")
+                  button.btn.btn-primary.form-control#rzp-button1(data-booking="true") Pay and Book
+         form#paymentStatus(type="hidden")
+
+      .text-center
+         .ticks Secure Payment
+         .ticks Guaranteed Standards
+         .ticks Immediate Contact
+         div All Credit Cards/ Debit Cards /Net Banking are accepted

@@ -1,0 +1,131 @@
+extends ../layouts/default
+
+block appendVars
+  - home = true
+block css
+  style
+    include ../../../public/resources/css/home.css
+block mainContent
+  -licensee = result.licensee
+  -products = result.products
+  -blogs = result.blogs
+
+  .site-content
+        article#post-5.row.pique-panel.pique-panel1.post-5.page.type-page.status-publish.has-post-thumbnail.hentry.pique-template-recent-posts(data-panel-title='Panel 1')
+          .pique-panel-background(style='background-image:url(https://phoenixexpeditions.files.wordpress.com/2017/02/spiti-3.jpg?w=1202&h=802&crop=1)')
+          .pique-panel-content.content-wrapper
+            header.entry-header
+              h2.entry-title Popular Treks and Tours
+            // .entry-header
+            footer.entry-footer
+            // .entry-footer
+            .entry-content
+              .pique-recent-posts.pique-grid-three
+                if products.length
+                  .row(id="tours")
+                    each plan,index in products
+                        .col-sm-4
+                          .product-tile.card
+                            a.img-cont(href="/plan/#{plan.slug}" title="Book #{plan.name}")
+                              if plan.image_url
+                                img.img-lazy(data-scroll="100" src="#{plan.image_url}" data-src="#{plan.image_url}" alt="#{plan.name}")
+                              else
+                                img(src="https://graph.facebook.com/#{licensee.facebook}/picture?type=large" alt ="#{licensee.name}")
+                            .content
+                              h3.link.ellipsis
+                                a(href="/plan/#{plan.slug}" title="Book #{plan.name}") #{plan.name}
+                              .trip-tags
+                                .tag
+                                  .bulb
+                                    mixin paintIcon('duration', {size: {x:15,y:15}, fill:'#fff'})
+                                  .name
+                                    strong Trip Duration: #{plan.duration}
+                              .price
+                                .offer ₹#{plan.offer_price}
+                                if plan.offer_price != plan.base_price
+                                  .base-price ₹#{plan.base_price}
+                              a.btn.btn-ghost(href="/plan/#{plan.slug}" title="Book #{plan.name}") Show Details
+        .row.content.dark(id="contact")
+          .content-wrapper
+            .col-sm-6.col-sm-offset-3(id="queryForm")
+              h4 Subscribe for Upcoming trips
+              form.js-validate-form.row.booking-form
+                input(type="hidden" name="slug" value="#{licensee.name + req.originalUrl}" )
+                input(type="hidden" name="travellers" value="1")
+                input(type="hidden" name="licensee" value="#{licensee.id}")
+                input(type="hidden"  name="phone")
+                .col-sm-6.form-item
+                  label Name
+                    input.form-control(type="text" placeholder="Your name" name="username" data-validate="empty" data-fieldType="name")
+                .col-sm-6.form-item
+                  label Email Id
+                    input.form-control(type="text" placeholder="You email id goes here" name="email" data-validate="email" data-fieldType="email")
+
+                .text-center.form-item
+                  button.btn.btn-secondary.js-getQuote.js-validate-submit Subscribe
+
+block js
+  script.
+    (function() {
+      var el = {
+        formBtn: '.js-getQuote',
+        $glider: $(".js-glide")
+      }
+
+      TDG.lazyLoadImages($('.home-content'));
+      el.$glider.glide({
+        type: 'slideshow',
+        autoplay: 2000,
+        hoverpause: false,
+        animationTimingFunc: "ease-out",
+        animationDuration: 1000
+      });
+      var querySubmit = function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        var $btn_ref = $(this), email_ref, user = {};
+
+        el.$form = $btn_ref.parents('form');
+
+        email_ref = $(el.$form.find('[name="email"]'));
+
+        user.slug = $(el.$form.find('[name=slug]')).val();
+        user.name = $(el.$form.find('[name=username]')).val();
+        user.mobile = $(el.$form.find('[name=phone]')).val();
+        user.start_date = $(el.$form.find('[name=start_date]')).val();
+        user.comment = $(el.$form.find('[name=comment]')).val();
+        user.is_booking = false;
+        user.licensee = $(el.$form.find('[name=licensee]')).val();
+
+        if (email_ref && email_ref.val()) {
+          user.email = email_ref.val();
+        }
+        if (!$btn_ref.hasClass('disabled')) {
+          $btn_ref.addClass('disabled');
+
+          $.ajax({
+            url: TDG.urls.PRODUCT_BOOKING,
+            method: 'POST',
+            data: user,
+            success: function (response) {
+              $('<div> We will contact you shortly </div>').insertAfter(el.$form);
+              $btn_ref.removeClass('disabled')
+            },
+            error: function (err) {
+              $('<div> Something is wrong </div>').insertAfter(el.$form);
+              $btn_ref.removeClass('disabled')
+            }
+          });
+        }
+      }; // Query Submit handler ends
+
+      $(el.formBtn).click(querySubmit);
+    })();
+
+
+
+
+
+
+

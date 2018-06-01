@@ -1,0 +1,34 @@
+doctype html
+
+include ../../metaMixin
+include ../mixins/iconMixin
+include ../mixins/paginationMixin
+include ../mixins/productMixin
+include ../mixins/headBannerMixin
+
+
+html(lang="en")
+  block appendVars
+  
+  include ../../head
+
+  body.page-template-default.page.page-id-4684.gdlr-core-body.tourmaster-body.traveltour-body.traveltour-body-front.traveltour-full.traveltour-with-sticky-navigation.gdlr-core-link-to-lightbox
+
+    #content-container.container-fluid
+      #page.hfeed.site
+        include ../includes/mobileHeader
+        - if (!hideHeader){
+          include ../includes/header
+        -}
+
+        .row.main-content
+          .col-xs-12
+            block mainContent
+
+        - if (!hideFooter){
+          include ../includes/footer
+        -}
+      .fixed-overlay.hide.hidden-xs
+
+  include ../../foot
+  block js

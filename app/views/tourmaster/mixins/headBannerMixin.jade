@@ -1,0 +1,10 @@
+mixin createBanner(title, image_url, caption)
+  - image_url = image_url || 'https://cdn.goodlayers.com/traveltour/wp-content/themes/traveltour/images/page-title-background.jpg'
+  .traveltour-page-title-wrap.traveltour-style-custom.traveltour-left-align.row(style="background-image:url('#{image_url}')")
+    .traveltour-header-transparent-substitute(style='height: 147px;')
+    .traveltour-page-title-overlay
+    .traveltour-page-title-container.traveltour-container
+      .traveltour-page-title-content.traveltour-item-pdlr
+        h1.traveltour-page-title #{title}
+        .traveltour-page-caption
+          | #{caption}

@@ -1,0 +1,76 @@
+-licensee = result.licensee
+- pages = result.pages
+
+.row
+	footer
+		.traveltour-footer-wrapper.traveltour-with-column-divider
+			.traveltour-footer-container.traveltour-container.clearfix
+				.traveltour-footer-column.traveltour-item-pdlr.traveltour-column-20
+					#text-1.widget.widget_text.traveltour-widget
+						h3.traveltour-widget-title
+							span.traveltour-widget-head-text #{licensee.name}
+						.gdlr-core-space-shortcode(style='margin-bottom: 10px;') #{licensee.desc.split('.')[0]+'.'}
+						h3.traveltour-widget-title
+							span.traveltour-widget-head-text Important Links
+						ul.unlist
+							li.cat-item#cat
+								a(href="/blog" title="Blog") Blog Posts
+							li.cat-item#cat
+								a(href="/pay" title="Easy Online Pay") Easy Online Pay
+							for page in pages
+										li.cat-item#cat
+											a(href="/page/#{page.slug}") #{page.title}
+				.traveltour-footer-column.traveltour-item-pdlr.traveltour-column-20
+					#tourmaster-widget-tour-category-6.widget.widget_tourmaster-widget-tour-category.traveltour-widget
+						h3.traveltour-widget-title
+							span.traveltour-widget-head-text Did You Like Us?
+						span.clear
+						.tourmaster-widget-tour-category
+							.tourmaster-tour-category-widget-holder.clearfix
+								#widget-area-3.widget-area(style="overflow:hidden")
+									aside#facebook-likebox-3.widget.widget_facebook_likebox
+										#fb-root
+										.fb-page(data-href='https://www.facebook.com/#{licensee.facebook}/', data-width='340', data-height='432', data-hide-cover='false', data-show-facepile='true', data-show-posts='false')
+											.fb-xfbml-parse-ignore
+												blockquote(cite='https://www.facebook.com/#{licensee.facebook}/')
+													a(href='https://www.facebook.com/#{licensee.facebook}/') Did you liked us?
+				.traveltour-footer-column.traveltour-item-pdlr.traveltour-column-20
+					#text-2.widget.widget_text.traveltour-widget
+						h3.traveltour-widget-title
+							span.traveltour-widget-head-text Contact Info
+						span.clear
+						.textwidget
+							div Address :
+								address !{licensee.address}
+							.gdlr-core-space-shortcode
+							br
+							div Phone :
+								a(href="tel:+91-#{licensee.mobile}") #{licensee.mobile}
+							.gdlr-core-space-shortcode
+							br
+							div
+								a(href="mailto:#{licensee.email}") #{licensee.email}
+							.gdlr-core-space-shortcode
+							br
+							.social-links
+								a.social-link.light(href='https://www.facebook.com/#{licensee.facebook}' title="Find travel d'globe on Facebook" target='_blank')
+									mixin paintIcon('facebook',{size:{x:24,y:24}})
+								a.social-link.light(href='https://twitter.com/#{licensee.twitter}' title="Find travel d'globe on Facebook" target='_blank')
+									mixin paintIcon('twitter',{size:{x:24,y:24}})
+								a.social-link.light(href='https://www.instagram.com/#{licensee.instagram}' title="Find travel d'globe on Facebook" target='_blank')
+									mixin paintIcon('instagram',{size:{x:24,y:24}})
+								a.social-link.light(href='https://www.pinterest.com/#{licensee.pinterest}' title="Find travel d'globe on Facebook" target='_blank')
+									mixin paintIcon('pinterest',{size:{x:24,y:24}})
+		.traveltour-copyright-wrapper
+			.traveltour-copyright-container.traveltour-container
+				.payment-icons
+					h6.font-weight-fix(style="margin-right:2em")
+						span.fas.fa-rupee-sign
+						| Payments we process
+					i.fab.fa-cc-visa
+					i.fab.fa-cc-mastercard
+					i.fab.fa-cc-amex
+					i.fab.fa-cc-paypal
+				.traveltour-copyright-text.traveltour-item-pdlr All Right Reserved &copy; #{licensee.name}
+					.caption Powered by traveldglobe.com
+				

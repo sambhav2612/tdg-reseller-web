@@ -1,0 +1,256 @@
+extends ../layouts/default
+append appendVars
+   - seo_desc = result.product.seo_desc || result.product.name
+   - seo_title = result.product.seo_title || result.product.name
+   - thumb_url = result.product.thumb_url
+
+block css
+  style
+    include ../../../public/resources/css/product.css
+    include ../../../public/resources/css/shareIcons.css
+
+block mainContent
+  -url = host + req.originalUrl
+  - product = result.product
+  - today = new Date(req.app.get('moment')().zone(330))
+  - today.setDate(today.getDate() + 2);
+  if !checkin
+    -checkin = ("0" + today.getDate()).slice(-2);
+    -checkin += '-';
+    -checkin += ("0" + (today.getMonth() + 1)).slice(-2);
+    -checkin += '-';
+    -checkin += today.getFullYear();
+  .blank.hidden-xs(style="position: fixed") 
+          .share
+              a.fb(href= "https://www.facebook.com/share.php?u=https://#{licensee.domain+'/plan/'+ product.slug}" target="_blank")
+                i.fa.fa-facebook
+              //a.vk(href='https://www.facebook.com')
+                i.fa.fa-vk
+              a.tt(href= "http://twitter.com/share?text=#{product.name}&url=https://#{licensee.domain+'/plan/'+ product.slug}" target="_blank")
+                i.fa.fa-twitter
+              a.gp(href= "https://plus.google.com/share?url=https://#{licensee.domain+'/plan/'+ product.slug}" title="Share on Google+" channel="google" element="Widget" class="tr-share social-connect-link google js-social-refer" target="_blank")
+                i.fa.fa-google-plus
+              |share
+
+  .product-mobile-tabs.visible-xs
+        a.tr-productTab.ripple.link-tab.js-nav(href='#itinerary', title='Itinerary', data-ripple-color='#E90A61')
+          div
+            svg(viewbox='0 0 485.211 485.21', height='20', width='20')
+              g
+                path(fill-rule='evenodd', clip-rule='evenodd', fill='#302d2d', stroke='undefined', stroke-width='undefined', d='M198.008,313.767l11.252,28.138c-10.897,4.354-21.765,7.672-32.368,9.89l-6.191-29.669 C179.587,320.253,188.767,317.444,198.008,313.767z M107.77,350.109c11.105,3.197,22.806,4.915,34.768,5.092l0.476-30.322 c-9.301-0.153-18.333-1.451-26.861-3.906L107.77,350.109z M346.552,297.184c8.741,1.723,17.268,4.714,25.352,8.887l13.927-26.948 c-10.665-5.479-21.889-9.418-33.412-11.672L346.552,297.184z M283.294,272.309l9.068,28.903c9.264-2.903,18.421-4.737,27.241-5.447 l-2.422-30.209C306.102,266.447,294.7,268.729,283.294,272.309z M234.611,295.113c-3.404,2.133-6.753,4.083-10.041,5.922 l14.75,26.481c3.701-2.082,7.491-4.266,11.28-6.637c5.214-3.229,10.31-6.104,15.313-8.653l-13.773-27.004 C246.457,288.125,240.59,291.412,234.611,295.113z M318.423,106.14c0,12.379-2.968,24.107-8.237,34.415l-67.579,132.374 c0,0-68.114-133.474-68.38-134.033c-4.77-9.892-7.432-21.028-7.432-32.756c0-41.875,33.937-75.814,75.812-75.814 C284.479,30.326,318.423,64.265,318.423,106.14z M288.097,106.14c0-25.114-20.377-45.49-45.49-45.49 c-25.114,0-45.49,20.376-45.49,45.49c0,25.111,20.376,45.487,45.49,45.487C267.72,151.627,288.097,131.251,288.097,106.14z M394.235,181.954h-71.131l-15.495,30.327h64.77l32.726,98.205l-10.454,11.551c11.136,10.062,16.909,19.336,16.941,19.368 l3.197-1.923l28.343,85.076H42.053l30.387-91.063c1.066,0.741,1.893,1.451,3.078,2.188l16.113-25.646 c-3.614-2.282-6.576-4.532-9.183-6.632l30.388-91.125h64.795c-6.427-12.559-11.491-22.477-15.488-30.327H90.978L0,454.885h485.211 L394.235,181.954z')
+            small Itinerary
+        a.tr-productTab.ripple.link-tab.js-nav(href='#gallery', title='Photos and Images of Barot River Camping', data-ripple-color='#E90A61')
+          div
+            svg(viewbox='0 0 150 125', height='20', width='20')
+              g
+                path(fill-rule='evenodd', clip-rule='evenodd', fill='#302d2d', stroke='#333', stroke-width='2', d='M24,37.9999862 L133,37.9999862 L133,117.999959 L24,117.999959 L24,37.9999862 Z M23.9555722,92.8668436 L0.265272939,34.3941362 L94.2863091,0.868799302 L109.51213,38.8347188')
+                path(fill-rule='evenodd', clip-rule='evenodd', fill='#302d2d', stroke='none', stroke-width='2', d='M41.316,103.379 C47.608,96.631 53.44,90.372 59.406,83.973 C63.332,86.448 67.098,88.82 71.277,91.454 C78.566,80.964 85.785,70.576 93.241,59.846 C95.612,64.283 97.796,68.364 100.054,72.587 C102.616,71.788 104.992,71.047 107.874,70.147 C111.363,81.227 114.806,92.162 118.338,103.379 L41.316,103.379 L41.316,103.379 Z')
+                path(fill-rule='evenodd', clip-rule='evenodd', fill='#302d2d', stroke='none', stroke-width='2', d='M41.507,63.657 C41.544,58.602 45.7,54.554 50.802,54.602 C55.757,54.649 60.241,59.091 60.093,63.805 C59.937,68.771 55.681,72.657 50.478,72.587 C45.487,72.521 41.47,68.523 41.507,63.657 L41.507,63.657 Z')
+            small Photos
+        a.tr-productTab.ripple.link-tab.js-nav(href='#queryForm', title='Equire tour for Barot River Camping', data-ripple-color='#E90A61')
+          div
+            svg(viewbox='0 0 15.999 15.999', height='20', width='20')
+              g
+                path(fill-rule='evenodd', clip-rule='evenodd', fill='#302d2d', stroke='none', stroke-width='2', d='M10.339,14.024C10.333,14.026,9.78,14.21,9.3,14.21c-0.265,0-0.372-0.055-0.406-0.079 c-0.168-0.117-0.48-0.336,0.054-1.4l1-1.994c0.593-1.184,0.681-2.329,0.245-3.225c-0.356-0.733-1.039-1.236-1.92-1.416 C7.956,6.031,7.634,5.999,7.315,5.999c-1.849,0-3.094,1.08-3.146,1.126C3.99,7.283,3.948,7.545,4.067,7.751 c0.12,0.206,0.367,0.3,0.595,0.222c0.005-0.002,0.559-0.187,1.039-0.187c0.263,0,0.369,0.055,0.402,0.078 c0.169,0.118,0.482,0.34-0.051,1.402l-1,1.995c-0.594,1.185-0.681,2.33-0.245,3.225c0.356,0.733,1.038,1.236,1.921,1.416 c0.314,0.063,0.636,0.097,0.954,0.097c1.85,0,3.096-1.08,3.148-1.126c0.179-0.157,0.221-0.42,0.102-0.626 C10.812,14.042,10.563,13.95,10.339,14.024z')
+                path(fill-rule='evenodd', clip-rule='evenodd', fill='#302d2d', stroke='none', stroke-width='2', d='M7,2.5a2.5,2.5 0 1,0 5,0a2.5,2.5 0 1,0 -5,0')
+            small Enquire
+        a.tr-productTab.ripple.link-tab.js-nav(href='#book', title='Book tour for Barot River Camping', data-ripple-color='#E90A61')
+          div  
+            svg(viewbox='0 0 99.055 98.901', height='20', width='20')
+              g
+                path(fill-rule='evenodd', clip-rule='evenodd', fill='#302d2d', stroke='undefined', stroke-width='undefined', d='M4.973,48.866C5.31,23.357,25.314,4.314,51.768,4.98   c23.894,0.602,43.207,21.508,42.287,46.433C93.188,74.896,72.97,94.355,48.732,93.931C24.019,93.5,4.647,73.549,4.973,48.866z    M49.658,87.703c20.806-0.095,38.192-17.578,38.111-38.323c-0.081-20.889-17.408-38.262-38.174-38.274   c-21.062-0.013-38.565,17.59-38.367,38.582C11.427,70.572,28.841,87.798,49.658,87.703z')
+                path(fill-rule='evenodd', clip-rule='evenodd', fill='#302d2d', stroke='undefined', stroke-width='undefined', d='M43.862,53.686c3.21-3.787,12.224-12.342,15.237-15.896   c2.19-2.583,3.903-1.257,5.806,0.521c2.063,1.928,1.377,3.319-0.336,4.942c-4.469,4.234-14.94,13.473-19.243,17.874   c-2.042,2.089-3.64,1.742-5.438-0.107c-1.392-1.431-2.885-2.764-4.256-4.215c-1.71-1.811-4.501-3.183-1.271-6.345   c2.798-2.738,4.533-1.609,6.506,0.657C41.293,51.607,41.856,51.978,43.862,53.686z')
+            small Book
+
+  .row
+    .content-wrapper
+      .col-sm-12.hidden-xs
+        ul.list.nav.js-action(style="margin-bottom:10px;")
+          li
+            a(href="#package")
+              .inline-block(style="vertical-align: text-top;margin-right:5px;")
+                mixin paintIcon('information', {size: {x:18,y:18},fill:'#333'})
+              .inline-block.hidden-xs Package Details
+          li
+            a(href="#itinerary")
+              .inline-block(style="vertical-align: text-top;margin-right:5px;")
+                mixin paintIcon('placeToVisit', {size: {x:18,y:18},fill:'#333'})
+              .inline-block.hidden-xs Itinerary
+          li
+            a(href="#reviews")
+              .inline-block(style="vertical-align: text-top;margin-right:5px;")
+                mixin paintIcon('reviews', {size: {x:18,y:18},fill:'#333'})
+              .inline-block.hidden-xs Reviews
+          li
+            a(href="#gallery")
+              .inline-block(style="vertical-align: text-top;margin-right:5px;")
+                mixin paintIcon('gallery', {size: {x:18,y:18},fill:'#333'})
+              .inline-block.hidden-xs Gallery
+          li
+            a(href="#bookForm") Book Now
+      .col-sm-12.row
+        .trip-head.clearfix
+          .col-sm-1.hidden-xs
+            .img-thumb
+              img.lazy.js-thumb.hand(src="#{product.image_url}" data-img="#{product.image_url}" alt="#{product.name}")
+            if product.images && product.images.length
+              -each photo, index in product.images
+                if index< 5
+                  .img-thumb
+                    img.lazy.js-thumb.hand(src="#{photo.thumb_url}"  data-img="#{photo.image_url}" alt="#{photo.caption}")
+          .col-sm-7
+            .title-img
+              .img-cont
+                img.lazy.js-image(src="#{product.image_url}" alt="#{product.name}")
+          .col-sm-4
+            h1 #{product.name}
+            .row
+              .col-sm-12(style="padding:5px 15px; 15px;")
+                .trip-tags
+                  .tag
+                    .bulb
+                      mixin paintIcon('duration', {size: {x:15,y:15}, fill:'#fff'})
+                    .name
+                      strong Trip Duration: #{product.duration}
+                  .tag
+                    .bulb
+                      mixin paintIcon('car', {size: {x:15,y:15}, fill:'#fff'})
+                    .name
+                      strong Pick up - #{product.pickup || 'NA'}
+                  .tag
+                    .bulb
+                      mixin paintIcon('group', {size: {x:15,y:15},fill:'#fff'})
+                    .name
+                      strong Group size of #{product.travellers} for confirm booking
+                  if product.location
+                    .tag
+                      .bulb
+                        mixin paintIcon('map_marker', {size: {x:15,y:15},fill:'#fff'})
+                      .name
+                        strong Location: #{product.location}
+                  
+      
+      .col-sm-8.left-section
+        if product.inclusions && product.inclusions.length
+          section
+            .card.content
+              h2 Package Inclusion
+              div.inclusions
+                -each inclusion in product.inclusions
+                  -inclusionObj = req.app.get('helperUtils').getItemFromId(inclusion)
+                  .brick
+                    div
+                      mixin paintIcon(inclusionObj.icon, {size: {x:30,y:30}})
+                    div #{inclusionObj.name}
+        
+        section
+          .card.content(id="package")
+            h2 Package Details
+            div (#{product.name})
+            if product.desc
+              - desc = product.desc.replace(/\n/g, '<br />' );
+              p(itemprop="description") !{desc}
+              if product.details
+                div !{product.details}
+        section(id="itinerary")
+          .card.content
+            h2 Itinerary of the Package
+            .itinerary-content.js-content
+              .content !{product.itinerary}
+              .show-more.js-showMore Show More
+        section
+          if product.packs
+            .card.content
+              h2 Things to carry with you
+              div !{product.packs}
+        if product.exclusions && product.exclusions.length
+          section
+              h2 Exclusions
+              div.exclusions
+                -each exclusion in product.exclusions
+                  -exclusionObj = req.app.get('helperUtils').getItemFromId(exclusion)
+                  .brick #{exclusionObj.name}
+
+      .col-sm-4.vertical-up
+          .booking-card.card#book
+            .design-price
+              .js-priceMenu
+                .price.dropmenu
+                  .offer.js-offer ₹#{parseInt(product.offer_price)}
+                  if product.offer_price != product.base_price
+                    .base-price.js-base ₹#{parseInt(product.base_price)}
+                  .js-priceOptions
+                .small
+                  if product.offer_price != product.base_price
+                      span Discount&nbsp;
+                      span.js-discount ₹#{product.base_price - product.offer_price}&nbsp;
+                  span per person
+
+            .content
+              section(id="bookForm")
+                  label.date-container
+                    .small Pick your Start Date
+                    input.form-control.js-startDate(type="text" placeholder="dd-mm-yyyy" data-date-format="dd-mm-yyyy" name="start_date" value="#{checkin}")
+              section
+                .small Package Cost Calculator/ Group offer
+                .row.text-center
+                  .col-xs-3
+                    div
+                      small Price
+                    .js-offer ₹#{parseInt(product.offer_price)}
+                  .col-xs-5
+                    div
+                      small Travellers
+                    div
+                      input.js-priceFactor.js-count(type="hidden" name="travellers" placeholder="Your Group size" value="#{product.travellers}")
+                      .qty-icon.js-qIcon(data-type="minus") -
+                      .qty.js-quantity #{product.travellers}
+                      .qty-icon.js-qIcon(data-type="plus") +
+                  .col-xs-4
+                    div
+                      small Total
+                    div ₹
+                      span.js-total #{product.travellers * parseInt(product.offer_price)}
+              .js-book.tr-bookNow(data-slug="#{product.slug}")
+                .booking-btn
+                  .err-txt.js-bookStatus
+                  .btn.btn-primary.lg Book Now
+          .card.content.dark(id="queryForm")
+            h4 Send an enquiry about this product
+            form.js-validate-form.row.booking-form
+              input(type="hidden" name="slug" value="#{req.originalUrl}" )
+              input(type="hidden" name="travellers" value="1")
+              input(type="hidden" name="budget" value="#{product.offer_price}")
+              input(type="hidden" name="licensee_product" value="#{product.id}")
+              input(type="hidden" name="licensee_id" value="#{licensee.id}")
+              input(type="hidden" name="is_booking" value="false")
+
+              .col-sm-12
+                label Query
+                  textarea.form-control(name="comment" placeholder="Please write your query")
+              .col-sm-12.form-item
+                label Mobile
+                  input.form-control(type="text" placeholder="10 digits to hear from us" name="mobile" data-validate="phone" data-fieldType="phone")
+              .text-center.form-item
+                button.btn.btn-secondary.js-getQuote.js-validate-submit Send Enquiry
+      .col-sm-12(id="gallery")
+        if product.images && product.images.length
+          section
+            h2 Gallery and Images
+            .row
+              -each photo in product.images
+                .col-sm-4
+                  .img-cont
+                    img.lazy(src="#{photo.image_url}"  alt="#{photo.caption}")
+      .col-sm-12(id="reviews")
+          div(data-repuso-grid="#{licensee.repuso_grid_number}" data-website-id="#{licensee.repuso_website_id}")
+          script(type="text/javascript" src="https://repuso.com/widgets/grid.js" async)
+
+block js
+  script.
+    TDG.defaultDate = new Date("#{today}");
+    TDG.productPrice = parseInt("#{product.offer_price}");
+    TDG.discount = parseInt("#{product.base_price - product.offer_price}");
+    TDG.plan = parseInt("#{product.plan_id}");
+  script
+    include ../../../public/resources/js/fragments/product.js
