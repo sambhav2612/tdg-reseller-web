@@ -16,7 +16,7 @@
     "debug": "2.0.0",
     "device": "^0.3.8",
     "dot": "^1.1.1",
-    "express": "^4.15.3",
+    "express": "^4.17.3",
     "express-device": "^0.4.2",
     "express-domain-middleware": "^0.1.0",
     "fs": "0.0.2",
